@@ -1,10 +1,6 @@
 /* =====================================================
-   CODEALPHA - IMAGE GALLERY
-   COMPLETE ADVANCED STYLE
-   ===================================================== */
-
-/* =====================================================
-   ROOT VARIABLES
+   CODEALPHA - ADVANCED IMAGE GALLERY
+   COMPLETE style.css
    ===================================================== */
 
 :root {
@@ -94,11 +90,6 @@ body::before {
 
     z-index: -5;
 }
-
-
-/* =====================================================
-   ANIMATED BACKGROUND
-   ===================================================== */
 
 body::after {
     content: "";
@@ -555,9 +546,6 @@ body::after {
         transform 0.35s ease,
         box-shadow 0.35s ease,
         opacity 0.35s ease;
-
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
 }
 
 .gallery-card:hover {
@@ -572,11 +560,6 @@ body::after {
 .gallery-card.hide {
     display: none;
 }
-
-
-/* =====================================================
-   CARD GLOW BORDER
-   ===================================================== */
 
 .gallery-card::before {
     content: "";
@@ -635,7 +618,7 @@ body::after {
 
 
 /* =====================================================
-   IMAGE CONTAINER
+   IMAGE
    ===================================================== */
 
 .image-container {
@@ -1103,7 +1086,7 @@ body::after {
 
 
 /* =====================================================
-   LIGHTBOX INFORMATION
+   LIGHTBOX INFO
    ===================================================== */
 
 .lightbox-info {
@@ -1188,7 +1171,7 @@ body::after {
 
 
 /* =====================================================
-   LIGHTBOX CLOSE BUTTON
+   CLOSE BUTTON
    ===================================================== */
 
 #closeBtn {
@@ -1242,7 +1225,7 @@ body::after {
 
 
 /* =====================================================
-   LIGHTBOX NAVIGATION ARROWS
+   DESKTOP LIGHTBOX ARROWS
    ===================================================== */
 
 #prevBtn,
@@ -1265,7 +1248,7 @@ body::after {
 
     justify-content: center !important;
 
-    z-index: 9999 !important;
+    z-index: 99999 !important;
 
     border-radius: 50% !important;
 
@@ -1276,13 +1259,13 @@ body::after {
     cursor: pointer;
 
     background:
-        rgba(15, 25, 45, 0.75) !important;
+        rgba(15, 25, 45, 0.82) !important;
 
     border:
         1px solid
-        rgba(255, 255, 255, 0.25) !important;
+        rgba(255, 255, 255, 0.3) !important;
 
-    color: #ffffff !important;
+    color: white !important;
 
     backdrop-filter:
         blur(12px);
@@ -1292,7 +1275,7 @@ body::after {
 
     box-shadow:
         0 8px 25px
-        rgba(0, 0, 0, 0.35),
+        rgba(0, 0, 0, 0.4),
         0 0 20px
         rgba(100, 220, 255, 0.15);
 
@@ -1302,22 +1285,13 @@ body::after {
         box-shadow 0.25s ease;
 }
 
-
-/* Previous */
-
 #prevBtn {
     left: 18px !important;
 }
 
-
-/* Next */
-
 #nextBtn {
     right: 18px !important;
 }
-
-
-/* Hover */
 
 #prevBtn:hover,
 #nextBtn:hover {
@@ -1335,9 +1309,6 @@ body::after {
         rgba(100, 220, 255, 0.3);
 }
 
-
-/* Press */
-
 #prevBtn:active,
 #nextBtn:active {
     transform:
@@ -1347,7 +1318,7 @@ body::after {
 
 
 /* =====================================================
-   FAVORITE BUTTON
+   FAVORITE
    ===================================================== */
 
 #favoriteBtn {
@@ -1423,7 +1394,7 @@ body::after {
 
 
 /* =====================================================
-   IMAGE COUNTER
+   COUNTER
    ===================================================== */
 
 .image-counter {
@@ -1527,7 +1498,7 @@ footer strong {
 
 
 /* =====================================================
-   MOBILE
+   TABLET
    ===================================================== */
 
 @media (max-width: 900px) {
@@ -1543,6 +1514,10 @@ footer strong {
     }
 }
 
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
 
 @media (max-width: 650px) {
 
@@ -1607,7 +1582,7 @@ footer strong {
     }
 
 
-    /* Mobile overlay */
+    /* Overlay */
 
     .image-overlay {
         opacity: 1;
@@ -1664,7 +1639,8 @@ footer strong {
     }
 
     .lightbox-info {
-        padding: 25px 20px 30px;
+        padding:
+            25px 20px 30px;
     }
 
     #lightboxTitle {
@@ -1693,17 +1669,65 @@ footer strong {
 
 
     /* =================================================
-       MOBILE LIGHTBOX ARROWS
+       FINAL MOBILE ARROW FIX
        ================================================= */
 
     #prevBtn,
     #nextBtn {
+        position: fixed !important;
+
+        /*
+         * The image occupies the upper part
+         * of the mobile lightbox.
+         *
+         * 30vh places arrows around
+         * the image instead of the title.
+         */
+
+        top: 30vh !important;
+
+        bottom: auto !important;
+
         width: 46px !important;
         height: 46px !important;
 
+        transform:
+            translateY(-50%) !important;
+
+        z-index: 99999 !important;
+
+        display: flex !important;
+
+        align-items: center !important;
+
+        justify-content: center !important;
+
+        border-radius: 50% !important;
+
         font-size: 30px !important;
 
-        top: 50% !important;
+        line-height: 1 !important;
+
+        background:
+            rgba(8, 18, 35, 0.85) !important;
+
+        color: white !important;
+
+        border:
+            1px solid
+            rgba(255, 255, 255, 0.3) !important;
+
+        box-shadow:
+            0 8px 25px
+            rgba(0, 0, 0, 0.45),
+            0 0 18px
+            rgba(100, 232, 255, 0.18);
+
+        backdrop-filter:
+            blur(12px);
+
+        -webkit-backdrop-filter:
+            blur(12px);
     }
 
     #prevBtn {
@@ -1712,6 +1736,13 @@ footer strong {
 
     #nextBtn {
         right: 10px !important;
+    }
+
+    #prevBtn:active,
+    #nextBtn:active {
+        transform:
+            translateY(-50%)
+            scale(0.9) !important;
     }
 
 
@@ -1749,8 +1780,11 @@ footer strong {
         padding: 18px;
     }
 
+
     #prevBtn,
     #nextBtn {
+        top: 29vh !important;
+
         width: 42px !important;
         height: 42px !important;
 
@@ -1764,6 +1798,29 @@ footer strong {
     #nextBtn {
         right: 6px !important;
     }
+}
+
+
+/* =====================================================
+   POINTER FIX
+   ===================================================== */
+
+.gallery-card {
+    cursor: pointer;
+}
+
+.image-container,
+.image-container img {
+    pointer-events: auto;
+}
+
+.image-overlay {
+    pointer-events: none;
+}
+
+.view-icon,
+.view-text {
+    pointer-events: none;
 }
 
 
@@ -1790,39 +1847,18 @@ a:focus-visible {
     *,
     *::before,
     *::after {
-        animation-duration: 0.01ms !important;
+        animation-duration:
+            0.01ms !important;
 
         animation-iteration-count:
             1 !important;
 
-        scroll-behavior: auto !important;
+        scroll-behavior:
+            auto !important;
 
         transition-duration:
             0.01ms !important;
     }
-}
-
-
-/* =====================================================
-   POINTER FIX
-   ===================================================== */
-
-.gallery-card {
-    cursor: pointer;
-}
-
-.image-container,
-.image-container img {
-    pointer-events: auto;
-}
-
-.image-overlay {
-    pointer-events: none;
-}
-
-.view-icon,
-.view-text {
-    pointer-events: none;
 }
 
 
