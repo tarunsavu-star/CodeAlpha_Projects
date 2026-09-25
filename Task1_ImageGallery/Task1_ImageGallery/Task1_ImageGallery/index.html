@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="NovaGallery - Advanced responsive image gallery created for CodeAlpha Frontend Development Internship">
+
+    <title>NovaGallery | CodeAlpha</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+    <!-- ==============================
+         ANIMATED BACKGROUND
+    =============================== -->
+
+    <div class="background-effects">
+        <span class="orb orb-one"></span>
+        <span class="orb orb-two"></span>
+        <span class="orb orb-three"></span>
+    </div>
+
+
+    <!-- ==============================
+         NAVIGATION
+    =============================== -->
+
+    <nav class="navbar">
+
+        <a href="#home" class="logo">
+            <span>✦</span>
+            NovaGallery
+        </a>
+
+        <div class="nav-links">
+
+            <a href="#home">
+                Home
+            </a>
+
+            <a href="#gallery">
+                Gallery
+            </a>
+
+            <a href="#about">
+                About
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ==============================
+         HERO SECTION
+    =============================== -->
+
+    <header class="hero" id="home">
+
+        <div class="hero-content">
+
+            <div class="badge">
+
+                <span class="pulse"></span>
+
+                CodeAlpha • Frontend Development
+
+            </div>
+
+
+            <h1>
+
+                Explore
+
+                <span>
+                    Visual Stories
+                </span>
+
+            </h1>
+
+
+            <p>
+
+                Discover beautiful moments through
+                an interactive and responsive image
+                gallery created using HTML, CSS
+                and JavaScript.
+
+            </p>
+
+
+            <a href="#gallery"
+               class="hero-btn">
+
+                Explore Gallery
+
+                <span>
+                    ↓
+                </span>
+
+            </a>
+
+        </div>
+
+
+        <div class="scroll-indicator">
+
+            <span></span>
+
+            Scroll to explore
+
+        </div>
+
+    </header>
+
+
+    <!-- ==============================
+         MAIN CONTENT
+    =============================== -->
+
+    <main>
+
+
+        <!-- ==========================
+             GALLERY SECTION
+        =========================== -->
+
+        <section class="gallery-section"
+                 id="gallery">
+
+
+            <!-- Section Heading -->
+
+            <div class="section-heading reveal">
+
+                <span class="section-label">
+                    MY COLLECTION
+                </span>
+
+
+                <h2>
+
+                    Discover
+
+                    <span>
+                        Beautiful Moments
+                    </span>
+
+                </h2>
+
+
+                <p>
+
+                    Select a category or click
+                    an image to open the full-screen
+                    gallery viewer.
+
+                </p>
+
+            </div>
+
+
+            <!-- ======================
+                 FILTER BUTTONS
+            ======================= -->
+
+            <div class="filters reveal">
+
+
+                <button
+                    class="filter-btn active"
+                    data-filter="all">
+
+                    All
+
+                </button>
+
+
+                <button
+                    class="filter-btn"
+                    data-filter="nature">
+
+                    Nature
+
+                </button>
+
+
+                <button
+                    class="filter-btn"
+                    data-filter="travel">
+
+                    Travel
+
+                </button>
+
+
+                <button
+                    class="filter-btn"
+                    data-filter="city">
+
+                    City
+
+                </button>
+
+
+            </div>
+
+
+            <!-- ======================
+                 GALLERY GRID
+            ======================= -->
+
+            <div class="gallery-grid"
+                 id="galleryGrid">
+
+
+                <!-- ==================
+                     IMAGE 01
+                =================== -->
+
+                <article
+                    class="gallery-card reveal"
+
+                    data-category="nature"
+
+                    data-title="Into The Wild"
+
+                    data-description="A peaceful and beautiful natural landscape."
+
+                    data-image="images/nature1.jpg">
+
+
+                    <div class="image-container">
+
+
+                        <img
+                            src="images/nature1.jpg"
+
+                            alt="Beautiful nature landscape"
+
+                            loading="lazy">
+
+
+                        <div class="image-overlay">
+
+
+                            <div class="overlay-content">
+
+                                <span class="category">
+                                    NATURE
+                                </span>
+
+
+                                <h3>
+                                    Into The Wild
+                                </h3>
+
+
+                                <button
+                                    class="view-btn"
+                                    aria-label="View Into The Wild">
+
+                                    +
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="card-footer">
+
+                        <div>
+
+                            <h3>
+                                Into The Wild
+                            </h3>
+
+                            <p>
+                                Nature Collection
+                            </p>
+
+                        </div>
+
+
+                        <span>
+                            01
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ==================
+                     IMAGE 02
+                =================== -->
+
+                <article
+                    class="gallery-card reveal"
+
+                    data-category="nature"
+
+                    data-title="Mountain Escape"
+
+                    data-description="A peaceful mountain landscape surrounded by nature."
+
+                    data-image="images/nature2.jpg">
+
+
+                    <div class="image-container">
+
+                        <img
+                            src="images/nature2.jpg"
+
+                            alt="Mountain landscape"
+
+                            loading="lazy">
+
+
+                        <div class="image-overlay">
+
+                            <div class="overlay-content">
+
+                                <span class="category">
+                                    NATURE
+                                </span>
+
+
+                                <h3>
+                                    Mountain Escape
+                                </h3>
+
+
+                                <button
+                                    class="view-btn"
+                                    aria-label="View Mountain Escape">
+
+                                    +
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="card-footer">
+
+                        <div>
+
+                            <h3>
+                                Mountain Escape
+                            </h3>
+
+                            <p>
+                                Nature Collection
+                            </p>
+
+                        </div>
+
+
+                        <span>
+                            02
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ==================
+                     IMAGE 03
+                =================== -->
+
+                <article
+                    class="gallery-card reveal"
+
+                    data-category="travel"
+
+                    data-title="Wanderlust"
+
+                    data-description="Discover new places and unforgettable travel experiences."
+
+                    data-image="images/travel1.jpg">
+
+
+                    <div class="image-container">
+
+                        <img
+                            src="images/travel1.jpg"
+
+                            alt="Beautiful travel destination"
+
+                            loading="lazy">
+
+
+                        <div class="image-overlay">
+
+                            <div class="overlay-content">
+
+                                <span class="category">
+                                    TRAVEL
+                                </span>
+
+
+                                <h3>
+                                    Wanderlust
+                                </h3>
+
+
+                                <button
+                                    class="view-btn"
+                                    aria-label="View Wanderlust">
+
+                                    +
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="card-footer">
+
+                        <div>
+
+                            <h3>
+                                Wanderlust
+                            </h3>
+
+                            <p>
+                                Travel Collection
+                            </p>
+
+                        </div>
+
+
+                        <span>
+                            03
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ==================
+                     IMAGE 04
+                =================== -->
+
+                <article
+                    class="gallery-card reveal"
+
+                    data-category="travel"
+
+                    data-title="Adventure"
+
+                    data-description="An exciting journey filled with adventure."
+
+                    data-image="images/travel2.jpg">
+
+
+                    <div class="image-container">
+
+                        <img
+                            src="images/travel2.jpg"
+
+                            alt="Travel adventure"
+
+                            loading="lazy">
+
+
+                        <div class="image-overlay">
+
+                            <div class="overlay-content">
+
+                                <span class="category">
+                                    TRAVEL
+                                </span>
+
+
+                                <h3>
+                                    Adventure
+                                </h3>
+
+
+                                <button
+                                    class="view-btn"
+                                    aria-label="View Adventure">
+
+                                    +
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="card-footer">
+
+                        <div>
+
+                            <h3>
+                                Adventure
+                            </h3>
+
+                            <p>
+                                Travel Collection
+                            </p>
+
+                        </div>
+
+
+                        <span>
+                            04
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ==================
+                     IMAGE 05
+                =================== -->
+
+                <article
+                    class="gallery-card reveal"
+
+                    data-category="city"
+
+                    data-title="Urban Lights"
+
+                    data-description="Modern city lights creating a beautiful urban atmosphere."
+
+                    data-image="images/city1.jpg">
+
+
+                    <div class="image-container">
+
+                        <img
+                            src="images/city1.jpg"
+
+                            alt="Modern city skyline"
+
+                            loading="lazy">
+
+
+                        <div class="image-overlay">
+
+                            <div class="overlay-content">
+
+                                <span class="category">
+                                    CITY
+                                </span>
+
+
+                                <h3>
+                                    Urban Lights
+                                </h3>
+
+
+                                <button
+                                    class="view-btn"
+                                    aria-label="View Urban Lights">
+
+                                    +
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="card-footer">
+
+                        <div>
+
+                            <h3>
+                                Urban Lights
+                            </h3>
+
+                            <p>
+                                City Collection
+                            </p>
+
+                        </div>
+
+
+                        <span>
+                            05
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ==================
+                     IMAGE 06
+                =================== -->
+
+                <article
+                    class="gallery-card reveal"
+
+                    data-category="city"
+
+                    data-title="City Architecture"
+
+                    data-description="Modern architecture and contemporary city design."
+
+                    data-image="images/city2.jpg">
+
+
+                    <div class="image-container">
+
+                        <img
+                            src="images/city2.jpg"
+
+                            alt="Modern city architecture"
+
+                            loading="lazy">
+
+
+                        <div class="image-overlay">
+
+                            <div class="overlay-content">
+
+                                <span class="category">
+                                    CITY
+                                </span>
+
+
+                                <h3>
+                                    City Architecture
+                                </h3>
+
+
+                                <button
+                                    class="view-btn"
+                                    aria-label="View City Architecture">
+
+                                    +
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="card-footer">
+
+                        <div>
+
+                            <h3>
+                                City Architecture
+                            </h3>
+
+                            <p>
+                                City Collection
+                            </p>
+
+                        </div>
+
+
+                        <span>
+                            06
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- ==============================
+             ABOUT SECTION
+        =============================== -->
+
+        <section class="about"
+                 id="about">
+
+
+            <div class="about-card reveal">
+
+                <span class="section-label">
+                    ABOUT THIS PROJECT
+                </span>
+
+
+                <h2>
+
+                    Interactive.
+
+                    <span>
+                        Responsive. Modern.
+                    </span>
+
+                </h2>
+
+
+                <p>
+
+                    This image gallery was created
+                    as part of the CodeAlpha Frontend
+                    Development Internship. It demonstrates
+                    responsive design, JavaScript
+                    interactions, image navigation,
+                    lightbox viewing, hover effects
+                    and category filtering.
+
+                </p>
+
+
+                <div class="technologies">
+
+                    <span>
+                        HTML5
+                    </span>
+
+                    <span>
+                        CSS3
+                    </span>
+
+                    <span>
+                        JavaScript
+                    </span>
+
+                    <span>
+                        Responsive Design
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ==============================
+         LIGHTBOX
+    =============================== -->
+
+    <div class="lightbox"
+         id="lightbox">
+
+
+        <!-- Close -->
+
+        <button
+            class="lightbox-close"
+            id="closeBtn"
+            aria-label="Close gallery">
+
+            ×
+
+        </button>
+
+
+        <!-- Previous -->
+
+        <button
+            class="lightbox-nav previous"
+            id="prevBtn"
+            aria-label="Previous image">
+
+            ‹
+
+        </button>
+
+
+        <!-- Lightbox Content -->
+
+        <div class="lightbox-inner">
+
+
+            <img
+                id="lightboxImage"
+
+                src=""
+
+                alt="Gallery preview">
+
+
+            <div class="lightbox-info">
+
+
+                <div>
+
+                    <span
+                        id="lightboxCategory">
+                    </span>
+
+
+                    <h3
+                        id="lightboxTitle">
+                    </h3>
+
+
+                    <p
+                        id="lightboxDescription">
+                    </p>
+
+                </div>
+
+
+                <span
+                    id="counter">
+
+                    1 / 6
+
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- Next -->
+
+        <button
+            class="lightbox-nav next"
+            id="nextBtn"
+            aria-label="Next image">
+
+            ›
+
+        </button>
+
+    </div>
+
+
+    <!-- ==============================
+         FOOTER
+    =============================== -->
+
+    <footer>
+
+        <p>
+
+            © 2026 Tarun Kumar Savu
+
+            <span>•</span>
+
+            CodeAlpha Frontend Development Internship
+
+        </p>
+
+    </footer>
+
+
+    <!-- JavaScript -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
