@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="NovaCalc - Advanced Premium Calculator"
+    >
+
+    <title>NovaCalc | Advanced Calculator</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+</head>
+
+<body>
+
+    <!-- =====================================================
+         BACKGROUND EFFECTS
+    ====================================================== -->
+
+    <div class="background-effects">
+
+        <div class="gradient-orb orb-one"></div>
+        <div class="gradient-orb orb-two"></div>
+        <div class="gradient-orb orb-three"></div>
+
+        <div class="grid-overlay"></div>
+
+        <div class="particle particle-one"></div>
+        <div class="particle particle-two"></div>
+        <div class="particle particle-three"></div>
+        <div class="particle particle-four"></div>
+        <div class="particle particle-five"></div>
+        <div class="particle particle-six"></div>
+
+    </div>
+
+
+    <!-- =====================================================
+         NAVIGATION
+    ====================================================== -->
+
+    <header class="navbar">
+
+        <div class="brand">
+
+            <div class="brand-logo">
+                <span>✦</span>
+            </div>
+
+            <div class="brand-text">
+
+                <h1>NovaCalc</h1>
+
+                <p>
+                    Advanced Calculator
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="navbar-actions">
+
+            <div class="status-indicator">
+
+                <span class="status-dot"></span>
+
+                <span>
+                    Ready
+                </span>
+
+            </div>
+
+
+            <button
+                id="themeBtn"
+                class="nav-button"
+                type="button"
+                aria-label="Change theme"
+            >
+                ◐
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN APPLICATION
+    ====================================================== -->
+
+    <main class="app-container">
+
+
+        <!-- =================================================
+             CALCULATOR PANEL
+        ================================================== -->
+
+        <section class="calculator-panel">
+
+
+            <!-- Calculator Header -->
+
+            <div class="calculator-header">
+
+                <div>
+
+                    <span class="eyebrow">
+                        PRECISION CALCULATOR
+                    </span>
+
+                    <h2>
+                        Calculate anything.
+                    </h2>
+
+                </div>
+
+
+                <div class="calculator-badge">
+                    PRO
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 DISPLAY
+            ================================================== -->
+
+            <div class="display-container">
+
+
+                <div class="display-toolbar">
+
+                    <div class="memory-indicators">
+
+                        <span id="memoryIndicator">
+                            M
+                        </span>
+
+                        <span id="historyIndicator">
+                            HISTORY
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        id="copyBtn"
+                        class="copy-button"
+                        type="button"
+                        aria-label="Copy result"
+                    >
+                        <span>⧉</span>
+                        Copy
+                    </button>
+
+                </div>
+
+
+                <!-- Previous expression -->
+
+                <div
+                    id="expression"
+                    class="expression"
+                >
+                    Ready for calculation
+                </div>
+
+
+                <!-- Main result -->
+
+                <div
+                    id="display"
+                    class="main-display"
+                    aria-live="polite"
+                >
+                    0
+                </div>
+
+
+                <!-- Display footer -->
+
+                <div class="display-footer">
+
+                    <span id="displayStatus">
+                        Enter numbers to begin
+                    </span>
+
+                    <span>
+                        <span class="live-dot"></span>
+                        Live
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 QUICK TOOLS
+            ================================================== -->
+
+            <div class="quick-tools">
+
+                <button
+                    type="button"
+                    class="quick-tool"
+                    data-action="clear"
+                >
+                    <span class="tool-icon">
+                        AC
+                    </span>
+
+                    <span>
+                        Clear
+                    </span>
+                </button>
+
+
+                <button
+                    type="button"
+                    class="quick-tool"
+                    data-action="delete"
+                >
+                    <span class="tool-icon">
+                        ⌫
+                    </span>
+
+                    <span>
+                        Delete
+                    </span>
+                </button>
+
+
+                <button
+                    type="button"
+                    class="quick-tool"
+                    data-action="sign"
+                >
+                    <span class="tool-icon">
+                        ±
+                    </span>
+
+                    <span>
+                        Sign
+                    </span>
+                </button>
+
+
+                <button
+                    type="button"
+                    class="quick-tool"
+                    data-action="percent"
+                >
+                    <span class="tool-icon">
+                        %
+                    </span>
+
+                    <span>
+                        Percent
+                    </span>
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 CALCULATOR KEYPAD
+            ================================================== -->
+
+            <div
+                class="calculator-keypad"
+                aria-label="Calculator keypad"
+            >
+
+
+                <!-- ROW 1 -->
+
+                <button
+                    class="calculator-button function-button"
+                    type="button"
+                    data-action="clear"
+                >
+                    <span>AC</span>
+
+                    <small>
+                        Clear
+                    </small>
+                </button>
+
+
+                <button
+                    class="calculator-button function-button"
+                    type="button"
+                    data-action="delete"
+                >
+                    <span>DEL</span>
+
+                    <small>
+                        Delete
+                    </small>
+                </button>
+
+
+                <button
+                    class="calculator-button function-button"
+                    type="button"
+                    data-action="percent"
+                >
+                    <span>%</span>
+
+                    <small>
+                        Percent
+                    </small>
+                </button>
+
+
+                <button
+                    class="calculator-button operator-button"
+                    type="button"
+                    data-operator="/"
+                    aria-label="Divide"
+                >
+                    <span>÷</span>
+                </button>
+
+
+                <!-- ROW 2 -->
+
+                <button
+                    class="calculator-button number-button"
+                    type="button"
+                    data-number="7"
+                >
+                    7
+                </button>
+
+
+                <button
+                    class="calculator-button number-button"
+                    type="button"
+                    data-number="8"
+                >
+                    8
+                </button>
+
+
+                <button
+                    class="calculator-button number-button"
+                    type="button"
+                    data-number="9"
+                >
+                    9
+                </button>
+
+
+                <button
+                    class="calculator-button operator-button"
+                    type="button"
+                    data-operator="*"
+                    aria-label="Multiply"
+                >
+                    ×
+                </button>
+
+
+                <!-- ROW 3 -->
+
+                <button
+                    class="calculator-button number-button"
+                    type="button"
+                    data-number="4"
+                >
+                    4
+                </button>
+
+
+                <button
+                    class="calculator-button number-button"
+                    type="button"
+                    data-number="5"
+                >
+                    5
+                </button>
+
+
+                <button
+                    class="calculator-button number-button"
+                    type="button"
+                    data-number="6"
+                >
+                    6
+                </button>
+
+
+                <button
+                    class="calculator-button operator-button"
+                    type="button"
+                    data-operator="-"
+                    aria-label="Subtract"
+                >
+                    −
+                </button>
+
+
+                <!-- ROW 4 -->
+
+                <button
+                    class="calculator-button number-button"
+                    type="button"
+                    data-number="1"
+                >
+                    1
+                </button>
+
+
+                <button
+                    class="calculator-button number-button"
+                    type="button"
+                    data-number="2"
+                >
+                    2
+                </button>
+
+
+                <button
+                    class="calculator-button number-button"
+                    type="button"
+                    data-number="3"
+                >
+                    3
+                </button>
+
+
+                <button
+                    class="calculator-button operator-button"
+                    type="button"
+                    data-operator="+"
+                    aria-label="Add"
+                >
+                    +
+                </button>
+
+
+                <!-- ROW 5 -->
+
+                <button
+                    class="calculator-button function-button"
+                    type="button"
+                    data-action="sign"
+                >
+                    ±
+                </button>
+
+
+                <button
+                    class="calculator-button number-button zero-button"
+                    type="button"
+                    data-number="0"
+                >
+                    0
+                </button>
+
+
+                <button
+                    class="calculator-button number-button"
+                    type="button"
+                    data-number="."
+                >
+                    .
+                </button>
+
+
+                <button
+                    class="calculator-button equals-button"
+                    type="button"
+                    data-action="equals"
+                >
+                    =
+                </button>
+
+            </div>
+
+
+            <!-- =================================================
+                 KEYBOARD SHORTCUTS
+            ================================================== -->
+
+            <div class="keyboard-shortcuts">
+
+                <div class="shortcut-title">
+                    KEYBOARD SHORTCUTS
+                </div>
+
+
+                <div class="shortcut-list">
+
+                    <div class="shortcut">
+                        <kbd>0–9</kbd>
+                        <span>Numbers</span>
+                    </div>
+
+                    <div class="shortcut">
+                        <kbd>+</kbd>
+                        <span>Add</span>
+                    </div>
+
+                    <div class="shortcut">
+                        <kbd>−</kbd>
+                        <span>Subtract</span>
+                    </div>
+
+                    <div class="shortcut">
+                        <kbd>×</kbd>
+                        <span>Multiply</span>
+                    </div>
+
+                    <div class="shortcut">
+                        <kbd>÷</kbd>
+                        <span>Divide</span>
+                    </div>
+
+                    <div class="shortcut">
+                        <kbd>ENTER</kbd>
+                        <span>Calculate</span>
+                    </div>
+
+                    <div class="shortcut">
+                        <kbd>ESC</kbd>
+                        <span>Clear</span>
+                    </div>
+
+                    <div class="shortcut">
+                        <kbd>⌫</kbd>
+                        <span>Delete</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             HISTORY PANEL
+        ====================================================== -->
+
+        <aside class="history-panel">
+
+
+            <!-- History Header -->
+
+            <div class="history-header">
+
+                <div class="history-heading">
+
+                    <span class="eyebrow">
+                        RECENT ACTIVITY
+                    </span>
+
+                    <h2>
+                        Calculation History
+                    </h2>
+
+                </div>
+
+
+                <button
+                    id="clearHistory"
+                    class="history-clear-button"
+                    type="button"
+                >
+                    Clear All
+                </button>
+
+            </div>
+
+
+            <!-- Search -->
+
+            <div class="history-search">
+
+                <span>
+                    ⌕
+                </span>
+
+                <input
+                    id="historySearch"
+                    type="text"
+                    placeholder="Search calculations..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <!-- History Filter -->
+
+            <div class="history-filters">
+
+                <button
+                    class="history-filter active"
+                    data-filter="all"
+                    type="button"
+                >
+                    All
+                </button>
+
+                <button
+                    class="history-filter"
+                    data-filter="today"
+                    type="button"
+                >
+                    Today
+                </button>
+
+            </div>
+
+
+            <!-- History Items -->
+
+            <div
+                id="historyList"
+                class="history-list"
+            >
+
+                <!-- Empty state -->
+
+                <div
+                    id="emptyHistory"
+                    class="empty-history"
+                >
+
+                    <div class="empty-history-icon">
+                        ◷
+                    </div>
+
+                    <h3>
+                        No calculations yet
+                    </h3>
+
+                    <p>
+                        Your calculations will
+                        appear here automatically.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- History Footer -->
+
+            <div class="history-footer">
+
+                <div class="history-security">
+
+                    <span class="security-icon">
+                        ◉
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Private & Local
+                        </strong>
+
+                        <p>
+                            History stays on this device.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+    </main>
+
+
+    <!-- =====================================================
+         TOAST NOTIFICATION
+    ====================================================== -->
+
+    <div
+        id="toast"
+        class="toast"
+        role="status"
+        aria-live="polite"
+    >
+        <span id="toastIcon">
+            ✓
+        </span>
+
+        <span id="toastMessage">
+            Done
+        </span>
+
+    </div>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="footer">
+
+        <div class="footer-brand">
+            <span>✦</span>
+            NovaCalc
+        </div>
+
+        <p>
+            Built with
+            <strong>HTML</strong>,
+            <strong>CSS</strong> &
+            <strong>JavaScript</strong>
+        </p>
+
+        <span class="footer-internship">
+            CodeAlpha Frontend Development Internship
+        </span>
+
+    </footer>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
