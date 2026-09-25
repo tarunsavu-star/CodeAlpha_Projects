@@ -4,576 +4,169 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Discover Beautiful Moments | Image Gallery</title>
+    <title>CodeAlpha Projects - Tarun Kumar Savu</title>
 
-    <meta
-        name="description"
-        content="An interactive responsive image gallery featuring nature, travel and city photography."
-    >
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-    <link rel="stylesheet" href="style.css">
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #222;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: 45px 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 38px;
+        }
+
+        header p {
+            font-size: 18px;
+            margin-top: 12px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .container h2 {
+            text-align: center;
+            font-size: 30px;
+            margin-bottom: 30px;
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 22px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #111827;
+            color: white;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 30px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <!-- Animated Background -->
-    <div class="background-effects">
-        <span class="orb orb-1"></span>
-        <span class="orb orb-2"></span>
-        <span class="orb orb-3"></span>
-
-        <div class="particles">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </div>
-
-
-    <!-- Navigation -->
-    <header class="navbar">
-
-        <div class="logo">
-            <span class="logo-icon">✦</span>
-            <span>Moments</span>
-        </div>
-
-        <nav>
-            <a href="#home">Home</a>
-            <a href="#gallery">Gallery</a>
-            <a href="#about">About</a>
-        </nav>
-
+    <header>
+        <h1>CodeAlpha Projects</h1>
+        <p>Frontend Development Internship</p>
     </header>
 
+    <div class="container">
 
-    <!-- Hero -->
-    <main>
+        <h2>🚀 My Projects</h2>
 
-        <section class="hero" id="home">
+        <div class="projects">
 
-            <div class="hero-content">
-
-                <div class="hero-badge">
-                    ✨ Explore • Discover • Experience
-                </div>
-
-                <h1>
-                    Discover
-                    <span>Beautiful</span>
-                    Moments
-                </h1>
+            <!-- TASK 1 -->
+            <div class="card">
+                <h3>🖼️ Task 1 - Image Gallery</h3>
 
                 <p>
-                    Explore breathtaking nature, unforgettable travel
-                    destinations and fascinating city landscapes.
+                    Responsive Image Gallery built using
+                    HTML, CSS and JavaScript.
                 </p>
 
-                <a href="#gallery" class="explore-btn">
-                    Explore Gallery
-                    <span>↓</span>
+                <a
+                    class="btn"
+                    href="./Task1_ImageGallery/Task1_ImageGallery/">
+                    Open Task 1
                 </a>
-
             </div>
 
-        </section>
 
-
-        <!-- Gallery -->
-        <section class="gallery-section" id="gallery">
-
-            <div class="section-heading">
-
-                <span class="small-title">VISUAL JOURNEY</span>
-
-                <h2>Explore the World</h2>
+            <!-- TASK 2 -->
+            <div class="card">
+                <h3>🧮 Task 2 - Calculator</h3>
 
                 <p>
-                    Select a category or click an image to open the
-                    full-screen gallery viewer.
+                    Interactive Calculator built using
+                    HTML, CSS and JavaScript.
                 </p>
 
+                <a
+                    class="btn"
+                    href="./Task2_Calculator/">
+                    Open Task 2
+                </a>
             </div>
 
 
-            <!-- Filters -->
-            <div class="filters">
-
-                <button class="filter-btn active" data-filter="all">
-                    <span>✦</span>
-                    All
-                </button>
-
-                <button class="filter-btn" data-filter="nature">
-                    🌿 Nature
-                </button>
-
-                <button class="filter-btn" data-filter="travel">
-                    ✈️ Travel
-                </button>
-
-                <button class="filter-btn" data-filter="city">
-                    🏙️ City
-                </button>
-
-            </div>
-
-
-            <!-- Gallery Grid -->
-            <div class="gallery-grid">
-
-
-                <!-- Nature 1 -->
-                <article
-                    class="gallery-card"
-                    data-category="nature"
-                    data-index="0"
-                >
-
-                    <div class="image-container">
-
-                        <img
-                            src="images/nature1.jpg"
-                            alt="Beautiful mountain lake surrounded by forest"
-                        >
-
-                        <div class="image-overlay">
-
-                            <span class="view-icon">⌕</span>
-
-                            <span class="view-text">
-                                View Story
-                            </span>
-
-                        </div>
-
-                        <span class="category-badge">
-                            🌿 Nature
-                        </span>
-
-                    </div>
-
-                    <div class="card-content">
-
-                        <h3>Mountain Lake</h3>
-
-                        <p>
-                            Peaceful landscapes and fresh natural surroundings.
-                        </p>
-
-                        <span class="read-more">
-                            Discover →
-                        </span>
-
-                    </div>
-
-                </article>
-
-
-                <!-- Nature 2 -->
-                <article
-                    class="gallery-card"
-                    data-category="nature"
-                    data-index="1"
-                >
-
-                    <div class="image-container">
-
-                        <img
-                            src="images/nature2.jpg"
-                            alt="Green mountain valley with a clear stream"
-                        >
-
-                        <div class="image-overlay">
-
-                            <span class="view-icon">⌕</span>
-
-                            <span class="view-text">
-                                View Story
-                            </span>
-
-                        </div>
-
-                        <span class="category-badge">
-                            🌿 Nature
-                        </span>
-
-                    </div>
-
-                    <div class="card-content">
-
-                        <h3>Alpine Valley</h3>
-
-                        <p>
-                            Green valleys, mountains and flowing water.
-                        </p>
-
-                        <span class="read-more">
-                            Discover →
-                        </span>
-
-                    </div>
-
-                </article>
-
-
-                <!-- Travel 1 -->
-                <article
-                    class="gallery-card"
-                    data-category="travel"
-                    data-index="2"
-                >
-
-                    <div class="image-container">
-
-                        <img
-                            src="images/travel1.jpg"
-                            alt="Tropical island with blue water and palm trees"
-                        >
-
-                        <div class="image-overlay">
-
-                            <span class="view-icon">⌕</span>
-
-                            <span class="view-text">
-                                View Story
-                            </span>
-
-                        </div>
-
-                        <span class="category-badge">
-                            ✈️ Travel
-                        </span>
-
-                    </div>
-
-                    <div class="card-content">
-
-                        <h3>Tropical Escape</h3>
-
-                        <p>
-                            Crystal-clear water and relaxing island scenery.
-                        </p>
-
-                        <span class="read-more">
-                            Discover →
-                        </span>
-
-                    </div>
-
-                </article>
-
-
-                <!-- Travel 2 -->
-                <article
-                    class="gallery-card"
-                    data-category="travel"
-                    data-index="3"
-                >
-
-                    <div class="image-container">
-
-                        <img
-                            src="images/travel2.jpg"
-                            alt="Traveler watching a beautiful mountain sunset"
-                        >
-
-                        <div class="image-overlay">
-
-                            <span class="view-icon">⌕</span>
-
-                            <span class="view-text">
-                                View Story
-                            </span>
-
-                        </div>
-
-                        <span class="category-badge">
-                            ✈️ Travel
-                        </span>
-
-                    </div>
-
-                    <div class="card-content">
-
-                        <h3>Mountain Adventure</h3>
-
-                        <p>
-                            A beautiful viewpoint for adventure and exploration.
-                        </p>
-
-                        <span class="read-more">
-                            Discover →
-                        </span>
-
-                    </div>
-
-                </article>
-
-
-                <!-- City 1 -->
-                <article
-                    class="gallery-card"
-                    data-category="city"
-                    data-index="4"
-                >
-
-                    <div class="image-container">
-
-                        <img
-                            src="images/city1.jpg"
-                            alt="Modern city skyline illuminated at dusk"
-                        >
-
-                        <div class="image-overlay">
-
-                            <span class="view-icon">⌕</span>
-
-                            <span class="view-text">
-                                View Story
-                            </span>
-
-                        </div>
-
-                        <span class="category-badge">
-                            🏙️ City
-                        </span>
-
-                    </div>
-
-                    <div class="card-content">
-
-                        <h3>Modern Skyline</h3>
-
-                        <p>
-                            A vibrant skyline surrounded by waterfront lights.
-                        </p>
-
-                        <span class="read-more">
-                            Discover →
-                        </span>
-
-                    </div>
-
-                </article>
-
-
-                <!-- City 2 -->
-                <article
-                    class="gallery-card"
-                    data-category="city"
-                    data-index="5"
-                >
-
-                    <div class="image-container">
-
-                        <img
-                            src="images/city2.jpg"
-                            alt="Modern downtown city surrounded by skyscrapers"
-                        >
-
-                        <div class="image-overlay">
-
-                            <span class="view-icon">⌕</span>
-
-                            <span class="view-text">
-                                View Story
-                            </span>
-
-                        </div>
-
-                        <span class="category-badge">
-                            🏙️ City
-                        </span>
-
-                    </div>
-
-                    <div class="card-content">
-
-                        <h3>Urban Downtown</h3>
-
-                        <p>
-                            Modern architecture, business and city life.
-                        </p>
-
-                        <span class="read-more">
-                            Discover →
-                        </span>
-
-                    </div>
-
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- About -->
-        <section class="about-section" id="about">
-
-            <div class="about-content">
-
-                <span class="small-title">ABOUT THE GALLERY</span>
-
-                <h2>Every Picture Tells a Story</h2>
+            <!-- TASK 3 -->
+            <div class="card">
+                <h3>💼 Task 3 - Portfolio</h3>
 
                 <p>
-                    This interactive gallery brings together beautiful
-                    landscapes, travel destinations and modern city scenes.
-                    Explore each category and discover the story behind
-                    every image.
+                    Personal Portfolio Website built using
+                    HTML, CSS and JavaScript.
                 </p>
 
-                <div class="about-features">
-
-                    <div>
-                        <span>🌿</span>
-                        <strong>Nature</strong>
-                        <small>Peace &amp; biodiversity</small>
-                    </div>
-
-                    <div>
-                        <span>✈️</span>
-                        <strong>Travel</strong>
-                        <small>Adventure &amp; discovery</small>
-                    </div>
-
-                    <div>
-                        <span>🏙️</span>
-                        <strong>City</strong>
-                        <small>Modern life &amp; culture</small>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- Lightbox -->
-    <div class="lightbox" id="lightbox">
-
-        <div class="lightbox-backdrop"></div>
-
-        <div class="lightbox-content">
-
-            <button
-                class="close-btn"
-                id="closeBtn"
-                aria-label="Close gallery"
-            >
-                ×
-            </button>
-
-
-            <button
-                class="lightbox-arrow prev-btn"
-                id="prevBtn"
-                aria-label="Previous image"
-            >
-                ‹
-            </button>
-
-
-            <div class="lightbox-image-wrapper">
-
-                <img
-                    id="lightboxImage"
-                    src=""
-                    alt=""
-                >
-
-                <div class="image-loading" id="imageLoading">
-                    <span></span>
-                </div>
-
-            </div>
-
-
-            <button
-                class="lightbox-arrow next-btn"
-                id="nextBtn"
-                aria-label="Next image"
-            >
-                ›
-            </button>
-
-
-            <!-- Information Panel -->
-            <div class="info-panel">
-
-                <div class="info-top">
-
-                    <div>
-
-                        <span
-                            class="lightbox-category"
-                            id="lightboxCategory"
-                        ></span>
-
-                        <h2 id="lightboxTitle"></h2>
-
-                    </div>
-
-                    <button
-                        class="favorite-btn"
-                        id="favoriteBtn"
-                        aria-label="Add to favorites"
-                    >
-                        ♡
-                    </button>
-
-                </div>
-
-
-                <p id="lightboxDescription"></p>
-
-
-                <div class="info-details">
-
-                    <div class="detail-item">
-
-                        <span>📍</span>
-
-                        <div>
-                            <strong>Theme</strong>
-                            <small id="lightboxTheme"></small>
-                        </div>
-
-                    </div>
-
-
-                    <div class="detail-item">
-
-                        <span>✨</span>
-
-                        <div>
-                            <strong>Highlights</strong>
-                            <small id="lightboxHighlights"></small>
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="gallery-counter">
-                    <span id="currentNumber">1</span>
-                    <span>/</span>
-                    <span id="totalNumber">6</span>
-                </div>
-
+                <a
+                    class="btn"
+                    href="./Task3_Portfolio/">
+                    Open Task 3
+                </a>
             </div>
 
         </div>
@@ -581,27 +174,11 @@
     </div>
 
 
-    <!-- Toast -->
-    <div class="toast" id="toast">
-        ❤️ Added to favorites
-    </div>
-
-
-    <!-- Footer -->
     <footer>
-
         <p>
-            © 2026 Moments Gallery
+            © 2026 Tarun Kumar Savu. All Rights Reserved.
         </p>
-
-        <p>
-            Designed with HTML • CSS • JavaScript
-        </p>
-
     </footer>
-
-
-    <script src="script.js"></script>
 
 </body>
 </html>
