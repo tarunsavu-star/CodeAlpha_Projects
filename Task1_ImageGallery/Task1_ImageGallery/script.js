@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* =========================
+    /* =====================================================
        GALLERY DATA
-    ========================= */
+    ===================================================== */
 
     const galleryData = [
         {
@@ -12,8 +12,10 @@ document.addEventListener("DOMContentLoaded", () => {
             description:
                 "A peaceful mountain lake surrounded by forests and beautiful landscapes. Green vegetation contributes to oxygen production through photosynthesis and helps absorb carbon dioxide.",
             theme: "Mountain • Lake • Forest",
-            highlights: "Fresh surroundings, greenery and peaceful scenery"
+            highlights:
+                "Fresh surroundings, greenery and peaceful scenery"
         },
+
         {
             image: "images/nature2.jpg",
             category: "Nature",
@@ -21,17 +23,21 @@ document.addEventListener("DOMContentLoaded", () => {
             description:
                 "A beautiful alpine valley featuring green mountains and a clear flowing stream. Natural ecosystems support biodiversity and provide opportunities for hiking and photography.",
             theme: "Mountains • Valley • Stream",
-            highlights: "Biodiversity, fresh surroundings and scenic views"
+            highlights:
+                "Biodiversity, fresh surroundings and scenic views"
         },
+
         {
             image: "images/travel1.jpg",
             category: "Travel",
             title: "Tropical Escape",
             description:
-                "A tropical destination surrounded by clear blue water, palm trees and beautiful coastal scenery. A perfect visual representation of relaxation and exploration.",
+                "A tropical destination surrounded by clear blue water, palm trees and beautiful coastal scenery. A beautiful place for relaxation and exploration.",
             theme: "Island • Beach • Ocean",
-            highlights: "Water activities, relaxation and coastal scenery"
+            highlights:
+                "Water activities, relaxation and coastal scenery"
         },
+
         {
             image: "images/travel2.jpg",
             category: "Travel",
@@ -39,8 +45,10 @@ document.addEventListener("DOMContentLoaded", () => {
             description:
                 "A dramatic mountain viewpoint overlooking a beautiful valley. Mountain destinations are popular for trekking, hiking, photography and adventure experiences.",
             theme: "Adventure • Hiking • Mountains",
-            highlights: "Trekking, photography and panoramic views"
+            highlights:
+                "Trekking, photography and panoramic views"
         },
+
         {
             image: "images/city1.jpg",
             category: "City",
@@ -48,8 +56,10 @@ document.addEventListener("DOMContentLoaded", () => {
             description:
                 "A vibrant modern skyline illuminated at dusk. Architecture, waterfront views and city lights create an impressive urban atmosphere.",
             theme: "Skyline • Architecture • Waterfront",
-            highlights: "Modern buildings, city lights and urban views"
+            highlights:
+                "Modern buildings, city lights and urban views"
         },
+
         {
             image: "images/city2.jpg",
             category: "City",
@@ -57,20 +67,27 @@ document.addEventListener("DOMContentLoaded", () => {
             description:
                 "A modern downtown environment featuring skyscrapers and contemporary architecture. Cities bring together technology, business, culture and modern lifestyles.",
             theme: "Downtown • Buildings • Urban Life",
-            highlights: "Architecture, business, technology and culture"
+            highlights:
+                "Architecture, business, technology and culture"
         }
     ];
 
 
-    /* =========================
-       ELEMENTS
-    ========================= */
+    /* =====================================================
+       SELECT HTML ELEMENTS
+    ===================================================== */
 
-    const cards = document.querySelectorAll(".gallery-card");
-    const filterButtons = document.querySelectorAll(".filter-btn");
+    const cards =
+        document.querySelectorAll(".gallery-card");
 
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImage = document.getElementById("lightboxImage");
+    const filterButtons =
+        document.querySelectorAll(".filter-btn");
+
+    const lightbox =
+        document.getElementById("lightbox");
+
+    const lightboxImage =
+        document.getElementById("lightboxImage");
 
     const lightboxTitle =
         document.getElementById("lightboxTitle");
@@ -108,135 +125,41 @@ document.addEventListener("DOMContentLoaded", () => {
     const toast =
         document.getElementById("toast");
 
-    const imageLoading =
-        document.getElementById("imageLoading");
 
-
-    /* =========================
+    /* =====================================================
        VARIABLES
-    ========================= */
+    ===================================================== */
 
     let currentIndex = 0;
 
     let touchStartX = 0;
+
     let touchEndX = 0;
 
     let toastTimer;
 
-    totalNumber.textContent = galleryData.length;
+
+    totalNumber.textContent =
+        galleryData.length;
 
 
-    /* =========================
-       FILTER BUTTONS
-    ========================= */
+    /* =====================================================
+       OPEN IMAGE / LIGHTBOX
+    ===================================================== */
 
-    filterButtons.forEach(button => {
-
-        button.addEventListener("click", () => {
-
-            const filter = button.dataset.filter;
-
-            filterButtons.forEach(btn => {
-                btn.classList.remove("active");
-            });
-
-            button.classList.add("active");
-
-            cards.forEach((card, index) => {
-
-                const category =
-                    card.dataset.category;
-
-                const show =
-                    filter === "all" ||
-                    category === filter;
-
-                if (show) {
-
-                    card.classList.remove("hide");
-
-                    card.style.animation = "none";
-
-                    void card.offsetWidth;
-
-                    card.style.animation =
-                        "cardAppear 0.55s ease both";
-
-                } else {
-
-                    card.classList.add("hide");
-
-                }
-
-            });
-
-        });
-
-    });
-
-
-    /* =========================
-       OPEN LIGHTBOX
-    ========================= */
-
-    function openLightbox(index) {
+    function openImage(index) {
 
         currentIndex = index;
-
-        updateLightbox();
-
-        lightbox.classList.add("active");
-
-        document.body.style.overflow = "hidden";
-
-        favoriteBtn.classList.remove("liked");
-
-        favoriteBtn.textContent = "♡";
-
-    }
-
-
-    /* =========================
-       UPDATE LIGHTBOX
-    ========================= */
-
-    function updateLightbox() {
 
         const data =
             galleryData[currentIndex];
 
-        imageLoading.classList.add("active");
 
-        lightboxImage.style.opacity = "0";
+        lightboxImage.src =
+            data.image;
 
-        const newImage = new Image();
-
-        newImage.onload = () => {
-
-            lightboxImage.src = data.image;
-
-            lightboxImage.alt = data.title;
-
-            lightboxImage.style.opacity = "1";
-
-            imageLoading.classList.remove("active");
-
-        };
-
-        newImage.onerror = () => {
-
-            imageLoading.classList.remove("active");
-
-            lightboxImage.style.opacity = "1";
-
-            console.error(
-                "Image not found:",
-                data.image
-            );
-
-        };
-
-        newImage.src = data.image;
+        lightboxImage.alt =
+            data.title;
 
 
         lightboxCategory.textContent =
@@ -254,90 +177,133 @@ document.addEventListener("DOMContentLoaded", () => {
         lightboxHighlights.textContent =
             data.highlights;
 
+
         currentNumber.textContent =
             currentIndex + 1;
 
-        totalNumber.textContent =
-            galleryData.length;
 
-        preloadNearbyImages();
+        lightbox.classList.add("active");
+
+
+        document.body.style.overflow =
+            "hidden";
+
+
+        if (favoriteBtn) {
+
+            favoriteBtn.classList.remove(
+                "liked"
+            );
+
+            favoriteBtn.textContent =
+                "♡";
+
+        }
 
     }
 
 
-    /* =========================
+    /* =====================================================
        CLOSE LIGHTBOX
-    ========================= */
+    ===================================================== */
 
-    function closeLightbox() {
+    function closeImage() {
 
-        lightbox.classList.remove("active");
+        lightbox.classList.remove(
+            "active"
+        );
 
-        document.body.style.overflow = "";
-
-    }
-
-
-    /* =========================
-       NEXT
-    ========================= */
-
-    function showNext() {
-
-        currentIndex =
-            (currentIndex + 1) %
-            galleryData.length;
-
-        updateLightbox();
+        document.body.style.overflow =
+            "";
 
     }
 
 
-    /* =========================
-       PREVIOUS
-    ========================= */
+    /* =====================================================
+       NEXT IMAGE
+    ===================================================== */
 
-    function showPrevious() {
+    function nextImage() {
 
-        currentIndex =
-            (currentIndex - 1 +
-                galleryData.length) %
-            galleryData.length;
+        currentIndex++;
 
-        updateLightbox();
+        if (
+            currentIndex >=
+            galleryData.length
+        ) {
+            currentIndex = 0;
+        }
+
+
+        openImage(currentIndex);
 
     }
 
 
-    /* =========================
-       CARD / VIEW STORY CLICK
-    ========================= */
+    /* =====================================================
+       PREVIOUS IMAGE
+    ===================================================== */
+
+    function previousImage() {
+
+        currentIndex--;
+
+        if (currentIndex < 0) {
+
+            currentIndex =
+                galleryData.length - 1;
+
+        }
+
+
+        openImage(currentIndex);
+
+    }
+
+
+    /* =====================================================
+       CARD CLICK
+       Clicking anywhere on the card opens image
+    ===================================================== */
 
     cards.forEach((card, index) => {
 
-        const imageContainer =
-            card.querySelector(".image-container");
+        card.style.cursor =
+            "pointer";
+
+
+        card.addEventListener(
+            "click",
+            () => {
+
+                openImage(index);
+
+            }
+        );
+
+    });
+
+
+    /* =====================================================
+       VIEW STORY BUTTON
+    ===================================================== */
+
+    cards.forEach((card, index) => {
 
         const viewText =
-            card.querySelector(".view-text");
-
-        const viewIcon =
-            card.querySelector(".view-icon");
-
-        const readMore =
-            card.querySelector(".read-more");
-
-
-        if (imageContainer) {
-
-            imageContainer.addEventListener(
-                "click",
-                () => {
-                    openLightbox(index);
-                }
+            card.querySelector(
+                ".view-text"
             );
 
-        }
+        const viewIcon =
+            card.querySelector(
+                ".view-icon"
+            );
+
+        const readMore =
+            card.querySelector(
+                ".read-more"
+            );
 
 
         if (viewText) {
@@ -348,7 +314,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     event.stopPropagation();
 
-                    openLightbox(index);
+                    openImage(index);
 
                 }
             );
@@ -364,7 +330,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     event.stopPropagation();
 
-                    openLightbox(index);
+                    openImage(index);
 
                 }
             );
@@ -380,7 +346,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     event.stopPropagation();
 
-                    openLightbox(index);
+                    openImage(index);
 
                 }
             );
@@ -390,144 +356,298 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    /* =========================
-       BUTTONS
-    ========================= */
+    /* =====================================================
+       CATEGORY FILTER
+    ===================================================== */
+
+    filterButtons.forEach(button => {
+
+        button.addEventListener(
+            "click",
+            event => {
+
+                event.stopPropagation();
+
+
+                const filter =
+                    button.dataset.filter;
+
+
+                filterButtons.forEach(
+                    btn => {
+
+                        btn.classList.remove(
+                            "active"
+                        );
+
+                    }
+                );
+
+
+                button.classList.add(
+                    "active"
+                );
+
+
+                cards.forEach(
+                    (card, index) => {
+
+                        const category =
+                            card.dataset.category;
+
+
+                        if (
+                            filter === "all" ||
+                            category === filter
+                        ) {
+
+                            card.classList.remove(
+                                "hide"
+                            );
+
+
+                            card.style.animation =
+                                "none";
+
+
+                            void card.offsetWidth;
+
+
+                            card.style.animation =
+                                "cardAppear 0.55s ease both";
+
+                        } else {
+
+                            card.classList.add(
+                                "hide"
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+    });
+
+
+    /* =====================================================
+       CLOSE BUTTON
+    ===================================================== */
 
     if (closeBtn) {
 
         closeBtn.addEventListener(
             "click",
-            closeLightbox
+            event => {
+
+                event.stopPropagation();
+
+                closeImage();
+
+            }
         );
 
     }
+
+
+    /* =====================================================
+       NEXT BUTTON
+    ===================================================== */
 
     if (nextBtn) {
 
         nextBtn.addEventListener(
             "click",
-            showNext
+            event => {
+
+                event.stopPropagation();
+
+                nextImage();
+
+            }
         );
 
     }
+
+
+    /* =====================================================
+       PREVIOUS BUTTON
+    ===================================================== */
 
     if (prevBtn) {
 
         prevBtn.addEventListener(
             "click",
-            showPrevious
+            event => {
+
+                event.stopPropagation();
+
+                previousImage();
+
+            }
         );
 
     }
 
 
-    /* =========================
-       BACKGROUND CLOSE
-    ========================= */
+    /* =====================================================
+       BACKGROUND CLICK
+    ===================================================== */
 
     const backdrop =
-        document.querySelector(".lightbox-backdrop");
+        document.querySelector(
+            ".lightbox-backdrop"
+        );
+
 
     if (backdrop) {
 
         backdrop.addEventListener(
             "click",
-            closeLightbox
+            closeImage
         );
 
     }
 
 
-    /* =========================
+    /* =====================================================
        KEYBOARD CONTROLS
-    ========================= */
+    ===================================================== */
 
     document.addEventListener(
         "keydown",
         event => {
 
             if (
-                !lightbox.classList.contains("active")
+                !lightbox.classList.contains(
+                    "active"
+                )
             ) {
                 return;
             }
 
-            if (event.key === "Escape") {
-                closeLightbox();
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                closeImage();
+
             }
 
-            if (event.key === "ArrowRight") {
-                showNext();
+
+            if (
+                event.key === "ArrowRight"
+            ) {
+
+                nextImage();
+
             }
 
-            if (event.key === "ArrowLeft") {
-                showPrevious();
+
+            if (
+                event.key === "ArrowLeft"
+            ) {
+
+                previousImage();
+
             }
 
         }
     );
 
 
-    /* =========================
+    /* =====================================================
        MOBILE SWIPE
-    ========================= */
+    ===================================================== */
 
-    lightboxImage.addEventListener(
-        "touchstart",
-        event => {
+    if (lightboxImage) {
 
-            touchStartX =
-                event.changedTouches[0].screenX;
+        lightboxImage.addEventListener(
+            "touchstart",
+            event => {
 
-        },
-        { passive: true }
-    );
+                touchStartX =
+                    event.changedTouches[0]
+                        .screenX;
 
-
-    lightboxImage.addEventListener(
-        "touchend",
-        event => {
-
-            touchEndX =
-                event.changedTouches[0].screenX;
-
-            const difference =
-                touchStartX - touchEndX;
-
-            if (Math.abs(difference) < 50) {
-                return;
+            },
+            {
+                passive: true
             }
+        );
 
-            if (difference > 0) {
-                showNext();
-            } else {
-                showPrevious();
+
+        lightboxImage.addEventListener(
+            "touchend",
+            event => {
+
+                touchEndX =
+                    event.changedTouches[0]
+                        .screenX;
+
+
+                const difference =
+                    touchStartX -
+                    touchEndX;
+
+
+                if (
+                    Math.abs(difference) <
+                    50
+                ) {
+                    return;
+                }
+
+
+                if (
+                    difference > 0
+                ) {
+
+                    nextImage();
+
+                } else {
+
+                    previousImage();
+
+                }
+
+            },
+            {
+                passive: true
             }
+        );
 
-        },
-        { passive: true }
-    );
+    }
 
 
-    /* =========================
-       FAVORITE
-    ========================= */
+    /* =====================================================
+       FAVORITE BUTTON
+    ===================================================== */
 
     if (favoriteBtn) {
 
         favoriteBtn.addEventListener(
             "click",
-            () => {
+            event => {
+
+                event.stopPropagation();
+
 
                 const liked =
                     favoriteBtn.classList.toggle(
                         "liked"
                     );
 
+
                 if (liked) {
 
-                    favoriteBtn.textContent = "♥";
+                    favoriteBtn.textContent =
+                        "♥";
+
 
                     showToast(
                         "❤️ Added to favorites"
@@ -535,7 +655,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 } else {
 
-                    favoriteBtn.textContent = "♡";
+                    favoriteBtn.textContent =
+                        "♡";
+
 
                     showToast(
                         "Removed from favorites"
@@ -549,9 +671,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================
-       TOAST
-    ========================= */
+    /* =====================================================
+       TOAST MESSAGE
+    ===================================================== */
 
     function showToast(message) {
 
@@ -559,78 +681,68 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        toast.textContent = message;
 
-        toast.classList.add("show");
-
-        clearTimeout(toastTimer);
-
-        toastTimer = setTimeout(() => {
-
-            toast.classList.remove("show");
-
-        }, 2000);
-
-    }
+        toast.textContent =
+            message;
 
 
-    /* =========================
-       PRELOAD IMAGES
-    ========================= */
-
-    function preloadNearbyImages() {
-
-        const nextIndex =
-            (currentIndex + 1) %
-            galleryData.length;
-
-        const previousIndex =
-            (currentIndex - 1 +
-                galleryData.length) %
-            galleryData.length;
+        toast.classList.add(
+            "show"
+        );
 
 
-        [
-            galleryData[nextIndex].image,
-            galleryData[previousIndex].image
-        ].forEach(src => {
+        clearTimeout(
+            toastTimer
+        );
 
-            const image = new Image();
 
-            image.src = src;
+        toastTimer =
+            setTimeout(
+                () => {
 
-        });
+                    toast.classList.remove(
+                        "show"
+                    );
+
+                },
+                2000
+            );
 
     }
 
 
-    /* =========================
+    /* =====================================================
        SCROLL REVEAL
-    ========================= */
+    ===================================================== */
 
-    if ("IntersectionObserver" in window) {
+    if (
+        "IntersectionObserver" in window
+    ) {
 
         const observer =
             new IntersectionObserver(
                 entries => {
 
-                    entries.forEach(entry => {
+                    entries.forEach(
+                        entry => {
 
-                        if (
-                            entry.isIntersecting
-                        ) {
+                            if (
+                                entry.isIntersecting
+                            ) {
 
-                            entry.target.classList.add(
-                                "visible"
-                            );
+                                entry.target.classList.add(
+                                    "visible"
+                                );
 
-                            observer.unobserve(
-                                entry.target
-                            );
+
+                                observer.unobserve(
+                                    entry.target
+                                );
+
+                            }
 
                         }
-
-                    });
+                    );
 
                 },
                 {
@@ -640,41 +752,55 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         cards.forEach(card => {
+
             observer.observe(card);
+
         });
 
     } else {
 
         cards.forEach(card => {
-            card.classList.add("visible");
+
+            card.classList.add(
+                "visible"
+            );
+
         });
 
     }
 
 
-    /* =========================
+    /* =====================================================
        IMAGE LOAD EFFECT
-    ========================= */
+    ===================================================== */
 
     cards.forEach(card => {
 
         const image =
             card.querySelector("img");
 
+
         if (!image) {
             return;
         }
 
+
         if (image.complete) {
 
-            image.classList.add("loaded");
+            image.classList.add(
+                "loaded"
+            );
 
         } else {
 
             image.addEventListener(
                 "load",
                 () => {
-                    image.classList.add("loaded");
+
+                    image.classList.add(
+                        "loaded"
+                    );
+
                 }
             );
 
@@ -683,22 +809,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    /* =========================
-       PRELOAD ALL
-    ========================= */
-
-    galleryData.forEach(item => {
-
-        const image = new Image();
-
-        image.src = item.image;
-
-    });
-
-
-    /* =========================
-       3D CARD EFFECT
-    ========================= */
+    /* =====================================================
+       3D MOUSE EFFECT
+    ===================================================== */
 
     cards.forEach(card => {
 
@@ -706,32 +819,47 @@ document.addEventListener("DOMContentLoaded", () => {
             "mousemove",
             event => {
 
-                if (window.innerWidth < 800) {
+                if (
+                    window.innerWidth <
+                    800
+                ) {
                     return;
                 }
+
 
                 const rect =
                     card.getBoundingClientRect();
 
+
                 const x =
-                    event.clientX - rect.left;
+                    event.clientX -
+                    rect.left;
+
 
                 const y =
-                    event.clientY - rect.top;
+                    event.clientY -
+                    rect.top;
+
 
                 const centerX =
                     rect.width / 2;
 
+
                 const centerY =
                     rect.height / 2;
 
+
                 const rotateX =
                     ((y - centerY) /
-                        centerY) * -3;
+                        centerY) *
+                    -3;
+
 
                 const rotateY =
                     ((x - centerX) /
-                        centerX) * 3;
+                        centerX) *
+                    3;
+
 
                 card.style.transform =
                     `translateY(-12px)
@@ -746,7 +874,8 @@ document.addEventListener("DOMContentLoaded", () => {
             "mouseleave",
             () => {
 
-                card.style.transform = "";
+                card.style.transform =
+                    "";
 
             }
         );
@@ -754,9 +883,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    /* =========================
+    /* =====================================================
        SMOOTH NAVIGATION
-    ========================= */
+    ===================================================== */
 
     document
         .querySelectorAll(
@@ -769,19 +898,25 @@ document.addEventListener("DOMContentLoaded", () => {
                 event => {
 
                     const targetId =
-                        link.getAttribute("href");
+                        link.getAttribute(
+                            "href"
+                        );
+
 
                     const target =
                         document.querySelector(
                             targetId
                         );
 
+
                     if (target) {
 
                         event.preventDefault();
 
+
                         target.scrollIntoView({
-                            behavior: "smooth"
+                            behavior:
+                                "smooth"
                         });
 
                     }
@@ -792,16 +927,17 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
 
-    /* =========================
-       FINISHED
-    ========================= */
+    /* =====================================================
+       CONSOLE
+    ===================================================== */
 
     console.log(
-        "✨ Moments Gallery loaded successfully."
+        "✨ Discover Beautiful Moments loaded successfully!"
     );
 
     console.log(
-        `📸 ${galleryData.length} images loaded.`
+        "📸 Total images:",
+        galleryData.length
     );
 
 });
