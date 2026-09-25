@@ -1,81 +1,51 @@
-# CodeAlpha Frontend Development Internship Projects
+# CodeAlpha Frontend Development Internship
 
-This repository contains my projects completed as part of the **CodeAlpha Frontend Development Internship**.
+This repository contains the projects I completed during my **CodeAlpha Frontend Development Internship**.
 
 ## 🚀 Projects
 
-### 1. Image Gallery
-A responsive image gallery built using HTML, CSS, and JavaScript.
+### 1. 🖼️ Image Gallery
 
-**Features:**
-- Responsive gallery layout
-- Image categories and filters
-- Next/Previous navigation
-- Lightbox image preview
-- Hover effects
-- Smooth transitions
+A responsive and interactive image gallery developed using HTML, CSS and JavaScript.
 
-**Technologies:**
+👉 **[Open Task 1 – Image Gallery](https://tarunsavu-star.github.io/CodeAlpha_Projects/Task1_ImageGallery/)**
+
+---
+
+### 2. 🧮 Calculator
+
+A responsive calculator application developed using HTML, CSS and JavaScript.
+
+👉 **[Open Task 2 – Calculator](https://tarunsavu-star.github.io/CodeAlpha_Projects/Task2_Calculator/)**
+
+---
+
+### 3. 💻 Personal Portfolio
+
+A personal portfolio website showcasing my profile, skills, education and projects.
+
+👉 **[Open Task 3 – Personal Portfolio](https://tarunsavu-star.github.io/CodeAlpha_Projects/Task3_Portfolio/)**
+
+---
+
+## 🛠️ Technologies Used
+
 - HTML5
 - CSS3
 - JavaScript
+- Git
+- GitHub Pages
 
-### 2. Calculator
-A responsive calculator application developed using HTML, CSS, and JavaScript.
+## 👨‍💻 Author
 
-**Features:**
-- Addition
-- Subtraction
-- Multiplication
-- Division
-- Clear button
-- Real-time calculation
-- Responsive user interface
+**Tarun Kumar Savu**
 
-**Technologies:**
-- HTML5
-- CSS3
-- JavaScript
+BCA | Frontend Developer
 
-### 3. Personal Portfolio Website
-A responsive personal portfolio website showcasing my education, skills, projects, internships, certifications, resume, and contact information.
+## 🌐 Live Projects
 
-**Sections:**
-- Home
-- About Me
-- Skills
-- Projects
-- Education
-- Internships
-- Certifications
-- Resume
-- Contact
-
-**Technologies:**
-- HTML5
-- CSS3
-- JavaScript
-
-## 📁 Repository Structure
-
-```text
-CodeAlpha_Projects/
-│
-├── Task1_ImageGallery/
-│   ├── index.html
-│   ├── style.css
-│   ├── script.js
-│   └── images/
-│
-├── Task2_Calculator/
-│   ├── index.html
-│   ├── style.css
-│   └── script.js
-│
-├── Task3_Portfolio/
-│   ├── index.html
-│   ├── style.css
-│   ├── script.js
-│   └── images/
-│
-└── README.md
+| Task | Project | Live Demo |
+|---|---|---|
+| Task 1 | Image Gallery | [Open](https://tarunsavu-star.github.io/CodeAlpha_Projects/Task1_ImageGallery/) |
+| Task 2 | Calculator | [Open](https://tarunsavu-star.github.io/CodeAlpha_Projects/Task2_Calculator/) |
+| Task 3 | Portfolio | [Open](https://tarunsavu-star.github.io/CodeAlpha_Projects/Task3_Portfolio/) |
