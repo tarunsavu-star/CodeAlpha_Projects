@@ -1,75 +1,73 @@
-/* =========================================================
-   TARUN KUMAR SAVU - PORTFOLIO JAVASCRIPT
-   CodeAlpha Frontend Development Internship
-   ========================================================= */
-
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* =====================================================
-       MOBILE NAVIGATION
-       ===================================================== */
+    const body = document.body;
+    const themeButton = document.getElementById("themeButton");
+    const menuButton = document.getElementById("menuButton");
+    const navMenu = document.getElementById("navMenu");
+    const typingText = document.getElementById("typingText");
+    const projectModal = document.getElementById("projectModal");
+    const modalClose = document.getElementById("modalClose");
+    const modalIcon = document.getElementById("modalIcon");
+    const modalCategory = document.getElementById("modalCategory");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalDescription = document.getElementById("modalDescription");
+    const modalTags = document.getElementById("modalTags");
+    const aiButton = document.getElementById("aiButton");
+    const aiPanel = document.getElementById("aiPanel");
+    const closeAi = document.getElementById("closeAi");
+    const aiMessages = document.getElementById("aiMessages");
+    const aiInput = document.getElementById("aiInput");
+    const sendAi = document.getElementById("sendAi");
+    const contactForm = document.getElementById("contactForm");
+    const toast = document.getElementById("toast");
+    const backTop = document.getElementById("backTop");
 
-    const menuToggle = document.querySelector(".menu-toggle");
-    const navLinks = document.querySelector(".nav-links");
-
-    if (menuToggle && navLinks) {
-        menuToggle.addEventListener("click", () => {
-            navLinks.classList.toggle("active");
-            menuToggle.classList.toggle("active");
-        });
-
-        document.querySelectorAll(".nav-links a").forEach(link => {
-            link.addEventListener("click", () => {
-                navLinks.classList.remove("active");
-                menuToggle.classList.remove("active");
-            });
+    if (menuButton && navMenu) {
+        menuButton.addEventListener("click", () => {
+            navMenu.classList.toggle("open");
+            menuButton.classList.toggle("open");
         });
     }
 
+    document.querySelectorAll(".nav-link").forEach(link => {
+        link.addEventListener("click", () => {
+            navMenu?.classList.remove("open");
+            menuButton?.classList.remove("open");
+        });
+    });
 
-    /* =====================================================
-       DARK / LIGHT THEME
-       ===================================================== */
-
-    const themeToggle = document.querySelector("#themeToggle");
-    const savedTheme = localStorage.getItem("portfolioTheme");
+    const savedTheme = localStorage.getItem("portfolio-theme");
 
     if (savedTheme === "light") {
-        document.body.classList.add("light");
-
-        if (themeToggle) {
-            themeToggle.innerHTML = "☀️";
-        }
+        body.classList.add("light");
     }
 
-    if (themeToggle) {
-        themeToggle.addEventListener("click", () => {
-            document.body.classList.toggle("light");
+    function updateThemeIcon() {
+        if (!themeButton) return;
 
-            const isLight = document.body.classList.contains("light");
-
-            localStorage.setItem(
-                "portfolioTheme",
-                isLight ? "light" : "dark"
-            );
-
-            themeToggle.innerHTML = isLight ? "☀️" : "🌙";
-        });
+        themeButton.textContent =
+            body.classList.contains("light") ? "☀️" : "🌙";
     }
 
+    updateThemeIcon();
 
-    /* =====================================================
-       TYPING ANIMATION
-       ===================================================== */
+    themeButton?.addEventListener("click", () => {
+        body.classList.toggle("light");
 
-    const typingText = document.querySelector("#typingText");
+        localStorage.setItem(
+            "portfolio-theme",
+            body.classList.contains("light") ? "light" : "dark"
+        );
+
+        updateThemeIcon();
+    });
 
     const typingWords = [
+        "Software Developer",
         "Python Developer",
-        "Web Developer",
         "AI/ML Enthusiast",
-        "Full Stack Learner",
-        "Software Developer"
+        "Full Stack Developer",
+        "Frontend Developer"
     ];
 
     let wordIndex = 0;
@@ -77,7 +75,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let deleting = false;
 
     function typeEffect() {
-
         if (!typingText) return;
 
         const currentWord = typingWords[wordIndex];
@@ -94,9 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 setTimeout(typeEffect, 1500);
                 return;
             }
-
         } else {
-
             typingText.textContent =
                 currentWord.substring(0, characterIndex - 1);
 
@@ -104,154 +99,250 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (characterIndex === 0) {
                 deleting = false;
-                wordIndex++;
 
-                if (wordIndex >= typingWords.length) {
-                    wordIndex = 0;
-                }
+                wordIndex =
+                    (wordIndex + 1) % typingWords.length;
             }
         }
 
-        setTimeout(typeEffect, deleting ? 60 : 100);
+        setTimeout(
+            typeEffect,
+            deleting ? 55 : 90
+        );
     }
 
     typeEffect();
 
-
-    /* =====================================================
-       SCROLL REVEAL ANIMATION
-       ===================================================== */
-
     const revealElements =
-        document.querySelectorAll(
-            ".section, .project-card, .timeline-item, .skill-card, .education-card, .cert-card"
+        document.querySelectorAll(".reveal");
+
+    const revealObserver =
+        new IntersectionObserver(
+            entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                    }
+                });
+            },
+            { threshold: 0.12 }
         );
 
-    const revealObserver = new IntersectionObserver(
-        (entries) => {
-
-            entries.forEach(entry => {
-
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("show");
-                    revealObserver.unobserve(entry.target);
-                }
-
-            });
-
-        },
-        {
-            threshold: 0.12
-        }
-    );
-
     revealElements.forEach(element => {
-        element.classList.add("reveal");
         revealObserver.observe(element);
     });
 
-
-    /* =====================================================
-       ANIMATED COUNTERS
-       ===================================================== */
-
-    const counters = document.querySelectorAll(".counter");
+    const counters =
+        document.querySelectorAll(".counter");
 
     function animateCounter(counter) {
+        const target =
+            parseFloat(
+                counter.dataset.target ||
+                counter.textContent ||
+                "0"
+            );
 
-        const target = parseInt(
-            counter.getAttribute("data-target")
-        );
-
-        if (isNaN(target)) return;
+        const suffix =
+            counter.dataset.suffix || "";
 
         let current = 0;
 
-        const increment = Math.max(
-            1,
-            Math.ceil(target / 60)
-        );
+        const increment =
+            target / 60;
 
-        const timer = setInterval(() => {
-
+        function update() {
             current += increment;
 
             if (current >= target) {
-                current = target;
-                clearInterval(timer);
+                counter.textContent =
+                    target + suffix;
+
+                return;
             }
 
-            counter.textContent = current;
+            const value =
+                Number.isInteger(target)
+                    ? Math.floor(current)
+                    : current.toFixed(2);
 
-        }, 25);
+            counter.textContent =
+                value + suffix;
+
+            requestAnimationFrame(update);
+        }
+
+        update();
     }
 
-    const counterObserver = new IntersectionObserver(
-        entries => {
+    const counterObserver =
+        new IntersectionObserver(
+            entries => {
+                entries.forEach(entry => {
 
-            entries.forEach(entry => {
+                    if (
+                        entry.isIntersecting &&
+                        !entry.target.dataset.animated
+                    ) {
+                        entry.target.dataset.animated =
+                            "true";
 
-                if (entry.isIntersecting) {
-                    animateCounter(entry.target);
-                    counterObserver.unobserve(entry.target);
-                }
+                        animateCounter(
+                            entry.target
+                        );
+                    }
 
-            });
-
-        },
-        {
-            threshold: 0.5
-        }
-    );
+                });
+            },
+            { threshold: 0.7 }
+        );
 
     counters.forEach(counter => {
         counterObserver.observe(counter);
     });
 
+    const skillBars =
+        document.querySelectorAll(".bar i");
 
-    /* =====================================================
-       SKILL PROGRESS BARS
-       ===================================================== */
+    const skillObserver =
+        new IntersectionObserver(
+            entries => {
+                entries.forEach(entry => {
 
-    const skillBars = document.querySelectorAll(".skill-progress");
+                    if (entry.isIntersecting) {
 
-    const skillObserver = new IntersectionObserver(
-        entries => {
+                        const bar =
+                            entry.target;
 
-            entries.forEach(entry => {
+                        const width =
+                            bar.dataset.width ||
+                            bar.getAttribute(
+                                "data-width"
+                            );
 
-                if (entry.isIntersecting) {
-
-                    const percentage =
-                        entry.target.getAttribute("data-width");
-
-                    if (percentage) {
-                        entry.target.style.width =
-                            percentage + "%";
+                        if (width) {
+                            bar.style.width =
+                                width + "%";
+                        }
                     }
 
-                    skillObserver.unobserve(entry.target);
-                }
-
-            });
-
-        },
-        {
-            threshold: 0.4
-        }
-    );
+                });
+            },
+            { threshold: 0.5 }
+        );
 
     skillBars.forEach(bar => {
         skillObserver.observe(bar);
     });
 
+    const projects = {
 
-    /* =====================================================
-       PROJECT FILTER
-       ===================================================== */
+        career: {
+            icon: "🤖",
+            category: "AI / ML",
+            title: "AI Career Guidance Chatbot",
+
+            description:
+                "An AI-powered career guidance chatbot developed using Python, Flask, Machine Learning and Natural Language Processing. The application helps users explore career paths and receive guidance based on their interests and skills.",
+
+            tags: [
+                "Python",
+                "Flask",
+                "Machine Learning",
+                "NLP",
+                "HTML",
+                "CSS",
+                "JavaScript"
+            ]
+        },
+
+        placement: {
+            icon: "🎓",
+            category: "AI / ML",
+            title: "Student Placement Prediction System",
+
+            description:
+                "A machine learning application that predicts student placement outcomes using student-related academic and performance information. Built with Python, Pandas and Scikit-learn using a Random Forest model.",
+
+            tags: [
+                "Python",
+                "Pandas",
+                "Scikit-learn",
+                "Random Forest",
+                "Machine Learning",
+                "Tkinter"
+            ]
+        },
+
+        train: {
+            icon: "🚆",
+            category: "Web Development",
+            title: "Train Ticket Reservation Website",
+
+            description:
+                "A responsive train ticket reservation website created using HTML5, CSS and JavaScript. The project focuses on a clean user interface and responsive frontend experience.",
+
+            tags: [
+                "HTML5",
+                "CSS3",
+                "JavaScript",
+                "Responsive Design"
+            ]
+        },
+
+        weather: {
+            icon: "🌤️",
+            category: "Python",
+            title: "Advanced Weather App",
+
+            description:
+                "A weather application designed to display weather information through a simple and responsive interface with a focus on usability and frontend presentation.",
+
+            tags: [
+                "Python",
+                "Weather API",
+                "HTML",
+                "CSS",
+                "JavaScript"
+            ]
+        },
+
+        password: {
+            icon: "🔐",
+            category: "Python",
+            title: "Advanced Password Generator",
+
+            description:
+                "A Python-based password generator application with a graphical interface for creating strong and customizable passwords.",
+
+            tags: [
+                "Python",
+                "Tkinter",
+                "Security",
+                "GUI"
+            ]
+        },
+
+        bmi: {
+            icon: "⚕️",
+            category: "Python",
+            title: "BMI Calculator",
+
+            description:
+                "A Python Tkinter BMI calculator that calculates BMI from height and weight and provides a simple graphical interface. The project also includes SQLite and CSV-related functionality.",
+
+            tags: [
+                "Python",
+                "Tkinter",
+                "SQLite",
+                "CSV",
+                "Data Visualization"
+            ]
+        }
+    };
 
     const filterButtons =
-        document.querySelectorAll(".filter-btn");
+        document.querySelectorAll(".filter");
 
     const projectCards =
         document.querySelectorAll(".project-card");
@@ -260,36 +351,50 @@ document.addEventListener("DOMContentLoaded", () => {
 
         button.addEventListener("click", () => {
 
-            filterButtons.forEach(btn => {
-                btn.classList.remove("active");
+            filterButtons.forEach(item => {
+                item.classList.remove("active");
             });
 
             button.classList.add("active");
 
             const filter =
-                button.getAttribute("data-filter");
+                button.dataset.filter ||
+                button.getAttribute(
+                    "data-filter"
+                ) ||
+                "all";
 
             projectCards.forEach(card => {
 
                 const category =
-                    card.getAttribute("data-category");
+                    (
+                        card.dataset.category ||
+                        ""
+                    ).toLowerCase();
 
                 if (
                     filter === "all" ||
-                    category === filter
+                    category ===
+                    filter.toLowerCase()
                 ) {
 
-                    card.style.display = "block";
+                    card.style.display = "";
 
                     setTimeout(() => {
-                        card.classList.add("show-card");
-                    }, 50);
+                        card.style.opacity = "1";
+                        card.style.transform = "";
+                    }, 20);
 
                 } else {
 
-                    card.classList.remove("show-card");
-                    card.style.display = "none";
+                    card.style.opacity = "0";
+                    card.style.transform =
+                        "scale(.94)";
 
+                    setTimeout(() => {
+                        card.style.display =
+                            "none";
+                    }, 250);
                 }
 
             });
@@ -298,289 +403,158 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 
+    function openProject(projectId) {
 
-    /* =====================================================
-       PROJECT DATA
-       ===================================================== */
-
-    const projectData = {
-
-        chatbot: {
-            title: "AI Career Guidance Chatbot",
-            category: "AI / ML",
-            description:
-                "An AI-powered career guidance application designed to help students explore suitable career paths using machine learning and natural language processing.",
-            technologies:
-                "Python, Flask, Machine Learning, NLP, HTML, CSS, JavaScript",
-            features: [
-                "Career recommendation",
-                "Natural language interaction",
-                "Flask backend",
-                "Machine learning integration",
-                "Responsive interface"
-            ]
-        },
-
-        placement: {
-            title: "Student Placement Prediction System",
-            category: "Machine Learning",
-            description:
-                "A machine learning application that predicts student placement outcomes using academic and related student information.",
-            technologies:
-                "Python, Pandas, NumPy, Scikit-learn, Random Forest, Tkinter",
-            features: [
-                "Placement prediction",
-                "Random Forest model",
-                "Data preprocessing",
-                "Tkinter GUI",
-                "Student data analysis"
-            ]
-        },
-
-        train: {
-            title: "Train Ticket Reservation",
-            category: "Web Development",
-            description:
-                "A responsive train ticket reservation website created using frontend technologies with a clean and user-friendly interface.",
-            technologies:
-                "HTML5, CSS3, JavaScript",
-            features: [
-                "Responsive design",
-                "Train search interface",
-                "Ticket reservation UI",
-                "Interactive components",
-                "Mobile-friendly layout"
-            ]
-        },
-
-        weather: {
-            title: "Advanced Weather App",
-            category: "Web Development",
-            description:
-                "A modern weather application interface designed to display weather information with an attractive responsive design.",
-            technologies:
-                "HTML, CSS, JavaScript",
-            features: [
-                "Weather interface",
-                "Responsive layout",
-                "Modern UI",
-                "Interactive elements",
-                "Weather information display"
-            ]
-        },
-
-        password: {
-            title: "Advanced Password Generator",
-            category: "Python",
-            description:
-                "A Python-based password generator that creates customizable secure passwords through an easy-to-use graphical interface.",
-            technologies:
-                "Python, Tkinter",
-            features: [
-                "Random password generation",
-                "Custom password length",
-                "Character selection",
-                "GUI interface",
-                "Copy functionality"
-            ]
-        },
-
-        bmi: {
-            title: "BMI Calculator",
-            category: "Python",
-            description:
-                "A Python Tkinter BMI calculator with additional functionality for storing and viewing BMI information.",
-            technologies:
-                "Python, Tkinter, SQLite, CSV",
-            features: [
-                "BMI calculation",
-                "Tkinter GUI",
-                "SQLite storage",
-                "CSV export",
-                "BMI trend visualization"
-            ]
-        }
-
-    };
-
-
-    /* =====================================================
-       PROJECT MODAL
-       ===================================================== */
-
-    const modal =
-        document.querySelector("#projectModal");
-
-    const modalTitle =
-        document.querySelector("#modalTitle");
-
-    const modalCategory =
-        document.querySelector("#modalCategory");
-
-    const modalDescription =
-        document.querySelector("#modalDescription");
-
-    const modalTech =
-        document.querySelector("#modalTech");
-
-    const modalFeatures =
-        document.querySelector("#modalFeatures");
-
-    const modalClose =
-        document.querySelector(".modal-close");
-
-    const projectButtons =
-        document.querySelectorAll(".project-details");
-
-
-    function openProjectModal(projectKey) {
+        if (!projectModal) return;
 
         const project =
-            projectData[projectKey];
+            projects[projectId];
 
-        if (!project || !modal) return;
+        if (!project) return;
 
-        if (modalTitle)
-            modalTitle.textContent = project.title;
+        if (modalIcon) {
+            modalIcon.textContent =
+                project.icon;
+        }
 
-        if (modalCategory)
-            modalCategory.textContent = project.category;
+        if (modalCategory) {
+            modalCategory.textContent =
+                project.category;
+        }
 
-        if (modalDescription)
+        if (modalTitle) {
+            modalTitle.textContent =
+                project.title;
+        }
+
+        if (modalDescription) {
             modalDescription.textContent =
                 project.description;
+        }
 
-        if (modalTech)
-            modalTech.textContent =
-                project.technologies;
+        if (modalTags) {
 
-        if (modalFeatures) {
+            modalTags.innerHTML = "";
 
-            modalFeatures.innerHTML = "";
+            project.tags.forEach(tag => {
 
-            project.features.forEach(feature => {
+                const span =
+                    document.createElement(
+                        "span"
+                    );
 
-                const li =
-                    document.createElement("li");
+                span.textContent = tag;
 
-                li.textContent = feature;
-
-                modalFeatures.appendChild(li);
+                modalTags.appendChild(
+                    span
+                );
 
             });
-
         }
 
-        modal.classList.add("active");
+        projectModal.classList.add("open");
 
-        document.body.style.overflow = "hidden";
+        document.body.style.overflow =
+            "hidden";
     }
 
+    function closeProject() {
 
-    projectButtons.forEach(button => {
+        if (!projectModal) return;
 
-        button.addEventListener("click", () => {
-
-            const projectKey =
-                button.getAttribute("data-project");
-
-            openProjectModal(projectKey);
-
-        });
-
-    });
-
-
-    function closeProjectModal() {
-
-        if (!modal) return;
-
-        modal.classList.remove("active");
-
-        document.body.style.overflow = "";
-    }
-
-
-    if (modalClose) {
-
-        modalClose.addEventListener(
-            "click",
-            closeProjectModal
+        projectModal.classList.remove(
+            "open"
         );
 
+        document.body.style.overflow =
+            "";
     }
 
+    document
+        .querySelectorAll(".details-button")
+        .forEach(button => {
 
-    if (modal) {
+            button.addEventListener(
+                "click",
+                () => {
 
-        modal.addEventListener("click", event => {
+                    const projectId =
+                        button.dataset.project ||
+                        button.getAttribute(
+                            "data-project"
+                        );
 
-            if (event.target === modal) {
-                closeProjectModal();
-            }
+                    openProject(projectId);
+                }
+            );
 
         });
 
-    }
+    modalClose?.addEventListener(
+        "click",
+        closeProject
+    );
 
+    projectModal?.addEventListener(
+        "click",
+        event => {
 
-    /* =====================================================
-       ESC KEY - CLOSE MODAL
-       ===================================================== */
+            if (
+                event.target ===
+                projectModal
+            ) {
+                closeProject();
+            }
 
-    document.addEventListener("keydown", event => {
-
-        if (event.key === "Escape") {
-            closeProjectModal();
         }
+    );
 
-    });
+    document.addEventListener(
+        "keydown",
+        event => {
 
+            if (event.key === "Escape") {
 
-    /* =====================================================
-       AI PORTFOLIO ASSISTANT
-       ===================================================== */
+                closeProject();
 
-    const aiPanel =
-        document.querySelector("#aiAssistant");
+                aiPanel?.classList.remove(
+                    "open"
+                );
+            }
 
-    const aiMessages =
-        document.querySelector("#aiMessages");
+        }
+    );
 
-    const aiInput =
-        document.querySelector("#aiInput");
-
-    const aiSend =
-        document.querySelector("#aiSend");
-
-    const aiOpenButtons =
-        document.querySelectorAll(".open-ai");
-
-
-    function addAIMessage(message, type = "bot") {
+    function addAIMessage(
+        message,
+        type = "bot"
+    ) {
 
         if (!aiMessages) return;
 
-        const messageDiv =
-            document.createElement("div");
+        const messageElement =
+            document.createElement(
+                "div"
+            );
 
-        messageDiv.className =
-            `ai-message ${type}`;
+        messageElement.className =
+            "ai-message " + type;
 
-        messageDiv.textContent = message;
+        messageElement.textContent =
+            message;
 
-        aiMessages.appendChild(messageDiv);
+        aiMessages.appendChild(
+            messageElement
+        );
 
         aiMessages.scrollTop =
             aiMessages.scrollHeight;
     }
 
-
     function getAIResponse(question) {
 
         const text =
             question.toLowerCase().trim();
-
 
         if (
             text.includes("hello") ||
@@ -588,58 +562,40 @@ document.addEventListener("DOMContentLoaded", () => {
             text.includes("hey")
         ) {
 
-            return "Hello! 👋 I'm Tarun's Portfolio Assistant. Ask me about his skills, projects, internships, education, or resume.";
-
+            return "Hello! 👋 I'm Tarun's Portfolio Assistant. Ask me about his skills, projects, internships, education or resume.";
         }
-
 
         if (
             text.includes("skill") ||
-            text.includes("technolog")
+            text.includes("technology") ||
+            text.includes("technologies")
         ) {
 
-            return "Tarun's key skills include Python, Java, C, HTML, CSS, JavaScript, Flask, SQL, MySQL, MongoDB, Machine Learning, NLP, Pandas, NumPy, Scikit-learn, Power BI and MERN Full Stack Development.";
-
+            return "Tarun's key skills include Python, Java, C, HTML, CSS, JavaScript, Flask, SQL, MySQL, MongoDB, Machine Learning, NLP, Pandas, NumPy, Scikit-learn and MERN Full Stack Development.";
         }
 
+        if (text.includes("project")) {
 
-        if (
-            text.includes("project") ||
-            text.includes("projects")
-        ) {
-
-            return "Tarun has worked on an AI Career Guidance Chatbot, Student Placement Prediction System, Train Ticket Reservation Website, Advanced Weather App, Advanced Password Generator and BMI Calculator.";
-
+            return "Tarun's projects include an AI Career Guidance Chatbot, Student Placement Prediction System, Train Ticket Reservation Website, Advanced Weather App, Advanced Password Generator and BMI Calculator.";
         }
-
 
         if (
             text.includes("internship") ||
             text.includes("experience")
         ) {
 
-            return "Tarun has internship experience with Vidrutha Solutions, Oasis Infobyte and ADHOC NETWORK, covering software development, Python development and MERN full-stack development.";
-
+            return "Tarun has internship experience with Vidrutha Solutions, Oasis Infobyte and ADHOC NETWORK.";
         }
 
+        if (text.includes("vidrutha")) {
 
-        if (
-            text.includes("vidrutha")
-        ) {
-
-            return "At Vidrutha Solutions, Tarun worked as a Software Development Intern from December 2025 to April 2026, working with Python, Flask, Machine Learning, NLP and web technologies.";
-
+            return "At Vidrutha Solutions, Tarun worked on software development projects using Python, Flask, Machine Learning, NLP and web technologies.";
         }
 
+        if (text.includes("oasis")) {
 
-        if (
-            text.includes("oasis")
-        ) {
-
-            return "At Oasis Infobyte, Tarun worked as a Python Programming Intern from August 5 to September 15, 2026, working on projects such as a BMI Calculator, Random Password Generator and Weather App.";
-
+            return "At Oasis Infobyte, Tarun worked on Python projects including a BMI Calculator, Random Password Generator and Weather App.";
         }
-
 
         if (
             text.includes("education") ||
@@ -647,571 +603,746 @@ document.addEventListener("DOMContentLoaded", () => {
             text.includes("college")
         ) {
 
-            return "Tarun is pursuing a Bachelor of Computer Applications (BCA) at Sri Aditya Degree College, Srikakulam. His portfolio lists an overall CGPA of 7.81/10.";
-
+            return "Tarun completed his Bachelor of Computer Applications at Sri Aditya Degree College, Srikakulam.";
         }
 
+        if (text.includes("python")) {
 
-        if (
-            text.includes("python")
-        ) {
-
-            return "Python is one of Tarun's primary technical skills. He has used Python for machine learning, Flask applications, automation and GUI projects.";
-
+            return "Python is one of Tarun's primary technical skills. He has used Python for Machine Learning, Flask, Tkinter and application development.";
         }
-
 
         if (
             text.includes("ai") ||
             text.includes("machine learning") ||
-            text.includes("ml")
+            text.includes("ml") ||
+            text.includes("nlp")
         ) {
 
-            return "Tarun has experience with AI/ML concepts including Machine Learning, NLP, Pandas, NumPy and Scikit-learn. His AI Career Guidance Chatbot is one of his highlighted projects.";
+            return "Tarun has experience with Machine Learning, NLP, Pandas, NumPy and Scikit-learn. His AI Career Guidance Chatbot is one of his highlighted projects.";
+        }
+       /* =========================
+   PART 2 — PORTFOLIO SCRIPT
+   ========================= */
 
+document.addEventListener("DOMContentLoaded", () => {
+
+    // -------------------------
+    // Mobile Navigation
+    // -------------------------
+    const menuButton =
+        document.querySelector(".menu-toggle") ||
+        document.querySelector(".nav-toggle") ||
+        document.querySelector(".hamburger");
+
+    const navMenu =
+        document.querySelector(".nav-menu") ||
+        document.querySelector("nav ul") ||
+        document.querySelector(".nav-links");
+
+    if (menuButton && navMenu) {
+        menuButton.addEventListener("click", () => {
+            navMenu.classList.toggle("active");
+            menuButton.classList.toggle("active");
+        });
+
+        navMenu.querySelectorAll("a").forEach(link => {
+            link.addEventListener("click", () => {
+                navMenu.classList.remove("active");
+                menuButton.classList.remove("active");
+            });
+        });
+    }
+
+    // -------------------------
+    // Smooth Scrolling
+    // -------------------------
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener("click", function (event) {
+            const targetId = this.getAttribute("href");
+
+            if (!targetId || targetId === "#") return;
+
+            const target = document.querySelector(targetId);
+
+            if (target) {
+                event.preventDefault();
+
+                target.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+            }
+        });
+    });
+
+    // -------------------------
+    // Theme Toggle
+    // -------------------------
+    const themeToggle =
+        document.querySelector("#themeToggle") ||
+        document.querySelector(".theme-toggle") ||
+        document.querySelector("[data-theme-toggle]");
+
+    const savedTheme = localStorage.getItem("portfolio-theme");
+
+    if (savedTheme === "light") {
+        document.body.classList.add("light-theme");
+    }
+
+    if (themeToggle) {
+        themeToggle.addEventListener("click", () => {
+
+            document.body.classList.toggle("light-theme");
+
+            const isLight =
+                document.body.classList.contains("light-theme");
+
+            localStorage.setItem(
+                "portfolio-theme",
+                isLight ? "light" : "dark"
+            );
+        });
+    }
+
+    // -------------------------
+    // Scroll To Top
+    // -------------------------
+    const topButton =
+        document.querySelector("#scrollTop") ||
+        document.querySelector(".scroll-top");
+
+    if (topButton) {
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 400) {
+                topButton.classList.add("show");
+            } else {
+                topButton.classList.remove("show");
+            }
+        });
+
+        topButton.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+    }
+
+    // -------------------------
+    // Active Navigation
+    // -------------------------
+    const sections = document.querySelectorAll("section[id]");
+    const navLinks = document.querySelectorAll(
+        'nav a[href^="#"], .nav-links a[href^="#"]'
+    );
+
+    function updateActiveLink() {
+
+        let currentSection = "";
+
+        sections.forEach(section => {
+            const sectionTop =
+                section.getBoundingClientRect().top;
+
+            if (sectionTop <= 150) {
+                currentSection = section.id;
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove("active");
+
+            const href = link.getAttribute("href");
+
+            if (href === `#${currentSection}`) {
+                link.classList.add("active");
+            }
+        });
+    }
+
+    window.addEventListener("scroll", updateActiveLink);
+    updateActiveLink();
+
+    // -------------------------
+    // Reveal Animations
+    // -------------------------
+    const revealElements = document.querySelectorAll(
+        ".reveal, .fade-in, .project-card, .skill-card, .timeline-item"
+    );
+
+    if ("IntersectionObserver" in window) {
+
+        const observer = new IntersectionObserver(
+            (entries, observerInstance) => {
+
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add("visible");
+
+                        observerInstance.unobserve(
+                            entry.target
+                        );
+                    }
+                });
+
+            },
+            {
+                threshold: 0.12
+            }
+        );
+
+        revealElements.forEach(element => {
+            observer.observe(element);
+        });
+    } else {
+
+        revealElements.forEach(element => {
+            element.classList.add("visible");
+        });
+    }
+
+    // -------------------------
+    // Skill Progress Animation
+    // -------------------------
+    const skillBars =
+        document.querySelectorAll(".skill-progress");
+
+    if ("IntersectionObserver" in window) {
+
+        const skillObserver = new IntersectionObserver(
+            entries => {
+
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting) {
+
+                        const bar = entry.target;
+                        const width =
+                            bar.getAttribute("data-width") ||
+                            bar.dataset.width;
+
+                        if (width) {
+                            bar.style.width = width;
+                        }
+
+                        skillObserver.unobserve(bar);
+                    }
+                });
+
+            },
+            {
+                threshold: 0.5
+            }
+        );
+
+        skillBars.forEach(bar => {
+            skillObserver.observe(bar);
+        });
+    }
+
+    // -------------------------
+    // Contact Form
+    // -------------------------
+    const contactForm =
+        document.querySelector("#contactForm") ||
+        document.querySelector(".contact-form");
+
+    if (contactForm) {
+
+        contactForm.addEventListener("submit", event => {
+
+            event.preventDefault();
+
+            const name =
+                contactForm.querySelector(
+                    'input[name="name"]'
+                )?.value.trim();
+
+            const email =
+                contactForm.querySelector(
+                    'input[name="email"]'
+                )?.value.trim();
+
+            const message =
+                contactForm.querySelector(
+                    'textarea[name="message"]'
+                )?.value.trim();
+
+            if (!name || !email || !message) {
+
+                showNotification(
+                    "Please fill in all fields.",
+                    "error"
+                );
+
+                return;
+            }
+
+            showNotification(
+                "Thank you! Your message has been received.",
+                "success"
+            );
+
+            contactForm.reset();
+        });
+    }
+
+    // -------------------------
+    // Notification
+    // -------------------------
+    function showNotification(message, type = "success") {
+
+        const existing =
+            document.querySelector(".portfolio-notification");
+
+        if (existing) {
+            existing.remove();
         }
 
+        const notification =
+            document.createElement("div");
+
+        notification.className =
+            `portfolio-notification ${type}`;
+
+        notification.textContent = message;
+
+        document.body.appendChild(notification);
+
+        requestAnimationFrame(() => {
+            notification.classList.add("show");
+        });
+
+        setTimeout(() => {
+
+            notification.classList.remove("show");
+
+            setTimeout(() => {
+                notification.remove();
+            }, 300);
+
+        }, 3500);
+    }
+
+    // -------------------------
+    // Copy Email
+    // -------------------------
+    document.querySelectorAll(
+        "[data-copy-email], .copy-email"
+    ).forEach(button => {
+
+        button.addEventListener("click", async () => {
+
+            const email =
+                button.dataset.email ||
+                button.getAttribute("data-copy-email");
+
+            if (!email) return;
+
+            try {
+
+                await navigator.clipboard.writeText(email);
+
+                showNotification(
+                    "Email copied successfully!",
+                    "success"
+                );
+
+            } catch (error) {
+
+                showNotification(
+                    "Unable to copy email.",
+                    "error"
+                );
+            }
+        });
+    });
+
+    // -------------------------
+    // Project Buttons
+    // -------------------------
+    document.querySelectorAll(
+        ".project-card a, .project-btn"
+    ).forEach(button => {
+
+        button.addEventListener("click", () => {
+            button.classList.add("clicked");
+
+            setTimeout(() => {
+                button.classList.remove("clicked");
+            }, 300);
+        });
+    });
+
+    // -------------------------
+    // Current Year
+    // -------------------------
+    document.querySelectorAll(
+        "[data-current-year], #currentYear"
+    ).forEach(element => {
+        element.textContent =
+            new Date().getFullYear();
+    });
+
+    // -------------------------
+    // Typing Effect
+    // -------------------------
+    const typingElement =
+        document.querySelector(".typing-text") ||
+        document.querySelector("#typingText");
+
+    if (typingElement) {
+
+        const words = [
+            "Python Developer",
+            "Web Developer",
+            "AI/ML Enthusiast",
+            "BCA Graduate"
+        ];
+
+        let wordIndex = 0;
+        let characterIndex = 0;
+        let deleting = false;
+
+        function typeEffect() {
+
+            const currentWord =
+                words[wordIndex];
+
+            if (!deleting) {
+
+                typingElement.textContent =
+                    currentWord.substring(
+                        0,
+                        characterIndex + 1
+                    );
+
+                characterIndex++;
+
+                if (
+                    characterIndex ===
+                    currentWord.length
+                ) {
+
+                    deleting = true;
+
+                    setTimeout(
+                        typeEffect,
+                        1500
+                    );
+
+                    return;
+                }
+
+            } else {
+
+                typingElement.textContent =
+                    currentWord.substring(
+                        0,
+                        characterIndex - 1
+                    );
+
+                characterIndex--;
+
+                if (characterIndex === 0) {
+
+                    deleting = false;
+
+                    wordIndex =
+                        (wordIndex + 1) %
+                        words.length;
+                }
+            }
+
+            setTimeout(
+                typeEffect,
+                deleting ? 60 : 100
+            );
+        }
+
+        typeEffect();
+    }
+
+    // -------------------------
+    // AI Panel
+    // -------------------------
+    const aiButton =
+        document.querySelector("#aiButton") ||
+        document.querySelector(".ai-button") ||
+        document.querySelector(".ai-floating-button");
+
+    const aiPanel =
+        document.querySelector("#aiPanel") ||
+        document.querySelector(".ai-panel");
+
+    const aiClose =
+        document.querySelector("#aiClose") ||
+        document.querySelector(".ai-close");
+
+    const aiInput =
+        document.querySelector("#aiInput") ||
+        document.querySelector(".ai-input");
+
+    const aiForm =
+        document.querySelector("#aiForm") ||
+        document.querySelector(".ai-form");
+
+    const aiMessages =
+        document.querySelector("#aiMessages") ||
+        document.querySelector(".ai-messages");
+
+    if (aiButton && aiPanel) {
+
+        aiButton.addEventListener("click", event => {
+
+            event.preventDefault();
+
+            aiPanel.classList.toggle("active");
+
+            if (
+                aiPanel.classList.contains("active") &&
+                aiInput
+            ) {
+                setTimeout(() => {
+                    aiInput.focus();
+                }, 200);
+            }
+        });
+    }
+
+    if (aiClose && aiPanel) {
+
+        aiClose.addEventListener("click", () => {
+            aiPanel.classList.remove("active");
+        });
+    }
+
+    // -------------------------
+    // Portfolio AI Responses
+    // -------------------------
+    function getAIResponse(question) {
+
+        const text =
+            question.toLowerCase().trim();
+
+        if (
+            text.includes("hello") ||
+            text.includes("hi") ||
+            text.includes("hey")
+        ) {
+            return "Hello! 👋 I'm Tarun's portfolio assistant. Ask me about his skills, education, projects, internships, or experience.";
+        }
+
+        if (
+            text.includes("who") &&
+            text.includes("tarun")
+        ) {
+            return "Tarun Kumar Savu is a BCA graduate with interests in Python, Web Development, AI/ML and software development.";
+        }
+
+        if (
+            text.includes("skill") ||
+            text.includes("technology")
+        ) {
+            return "Tarun's skills include Python, Java, C, HTML, CSS, JavaScript, Flask, SQL, MySQL, PostgreSQL, MongoDB, Pandas, NumPy, Scikit-learn, AI/ML and web development.";
+        }
+
+        if (
+            text.includes("python")
+        ) {
+            return "Python is one of Tarun's primary technical skills. He has used Python for automation, GUI applications, machine learning and AI-based projects.";
+        }
+
+        if (
+            text.includes("education") ||
+            text.includes("degree") ||
+            text.includes("college")
+        ) {
+            return "Tarun completed his Bachelor of Computer Applications (BCA) from Sri Aditya Degree College, Srikakulam.";
+        }
+
+        if (
+            text.includes("internship") ||
+            text.includes("experience")
+        ) {
+            return "Tarun has internship experience including Software Development work at Vidrutha Solutions and Python Programming work through Oasis Infobyte.";
+        }
+
+        if (
+            text.includes("oasis") ||
+            text.includes("infobyte")
+        ) {
+            return "At Oasis Infobyte, Tarun worked on Python programming tasks including a BMI Calculator and Random Password Generator.";
+        }
+
+        if (
+            text.includes("vidrutha")
+        ) {
+            return "At Vidrutha Solutions, Tarun worked on software development and AI-based projects involving Flask, Machine Learning and NLP.";
+        }
+
+        if (
+            text.includes("project")
+        ) {
+            return "Tarun has worked on projects such as an AI Career Guidance Chatbot, Student Placement Prediction System, BMI Calculator, Random Password Generator and responsive web applications.";
+        }
+
+        if (
+            text.includes("contact") ||
+            text.includes("email")
+        ) {
+            return "Please use the Contact section of the portfolio to reach Tarun.";
+        }
+
+        if (
+            text.includes("github")
+        ) {
+            return "You can find Tarun's projects and source code through the GitHub link provided in the portfolio.";
+        }
+
+        if (
+            text.includes("linkedin")
+        ) {
+            return "You can connect with Tarun through the LinkedIn link available in the portfolio.";
+        }
+
+        if (
+            text.includes("ai") ||
+            text.includes("machine learning") ||
+            text.includes("ml") ||
+            text.includes("nlp")
+        ) {
+            return "Tarun has experience with AI/ML concepts and projects involving Machine Learning, NLP, Flask, Pandas, NumPy and Scikit-learn.";
+        }
 
         if (
             text.includes("resume") ||
             text.includes("cv")
         ) {
-
-            return "You can download Tarun's resume from the Resume section of this portfolio.";
-
+            return "You can view Tarun's professional information, skills, projects and experience through this portfolio.";
         }
 
-
-        if (
-            text.includes("contact") ||
-            text.includes("email") ||
-            text.includes("reach")
-        ) {
-
-            return "You can contact Tarun through the Contact section, LinkedIn, GitHub or email.";
-
-        }
-
-
-        if (
-            text.includes("github")
-        ) {
-
-            return "Tarun's GitHub profile contains his development projects and source code.";
-
-        }
-
-
-        if (
-            text.includes("linkedin")
-        ) {
-
-            return "You can connect with Tarun on LinkedIn through the social links provided in the portfolio.";
-
-        }
-
-
-        if (
-            text.includes("future") ||
-            text.includes("career")
-        ) {
-
-            return "Tarun is focused on developing his skills in software development, Python, AI/ML and full-stack web development.";
-
-        }
-
-
-        return "I can help you explore Tarun's skills, projects, internships, education, resume and contact information. Try asking something like: 'What are his skills?'";
-
-
+        return "I can help you learn about Tarun's education, skills, internships, projects, Python experience, AI/ML experience, GitHub and contact information.";
     }
 
+    // -------------------------
+    // Add AI Message
+    // -------------------------
+    function addAIMessage(message, sender) {
 
-    function sendAIMessage() {
+        if (!aiMessages) return;
 
-        if (!aiInput) return;
+        const messageElement =
+            document.createElement("div");
 
-        const question =
-            aiInput.value.trim();
+        messageElement.className =
+            `ai-message ${sender}`;
 
-        if (!question) return;
+        messageElement.textContent =
+            message;
 
-        addAIMessage(question, "user");
-
-        aiInput.value = "";
-
-        setTimeout(() => {
-
-            const response =
-                getAIResponse(question);
-
-            addAIMessage(response, "bot");
-
-        }, 500);
-
-    }
-
-
-    if (aiSend) {
-
-        aiSend.addEventListener(
-            "click",
-            sendAIMessage
+        aiMessages.appendChild(
+            messageElement
         );
 
+        aiMessages.scrollTop =
+            aiMessages.scrollHeight;
     }
 
+    // -------------------------
+    // AI Form Submit
+    // -------------------------
+    if (aiForm) {
 
+        aiForm.addEventListener(
+            "submit",
+            event => {
+
+                event.preventDefault();
+
+                const question =
+                    aiInput?.value.trim();
+
+                if (!question) return;
+
+                addAIMessage(
+                    question,
+                    "user"
+                );
+
+                if (aiInput) {
+                    aiInput.value = "";
+                }
+
+                setTimeout(() => {
+
+                    const response =
+                        getAIResponse(question);
+
+                    addAIMessage(
+                        response,
+                        "assistant"
+                    );
+
+                }, 400);
+            }
+        );
+    }
+
+    // -------------------------
+    // Enter Key For AI
+    // -------------------------
     if (aiInput) {
 
         aiInput.addEventListener(
             "keydown",
             event => {
 
-                if (event.key === "Enter") {
-                    sendAIMessage();
-                }
+                if (
+                    event.key === "Enter" &&
+                    !event.shiftKey
+                ) {
 
+                    event.preventDefault();
+
+                    if (aiForm) {
+                        aiForm.dispatchEvent(
+                            new Event("submit", {
+                                bubbles: true,
+                                cancelable: true
+                            })
+                        );
+                    }
+                }
             }
         );
-
     }
 
-
-    aiOpenButtons.forEach(button => {
-
-        button.addEventListener("click", () => {
-
-            if (!aiPanel) return;
-
-            aiPanel.classList.add("active");
-
-            aiInput?.focus();
-
-        });
-
-    });
-
-
-    const aiClose =
-        document.querySelector(".ai-close");
-
-    if (aiClose) {
-
-        aiClose.addEventListener("click", () => {
-
-            aiPanel?.classList.remove("active");
-
-        });
-
-    }
-
-
-    /* =====================================================
-       CONTACT FORM
-       ===================================================== */
-
-    const contactForm =
-        document.querySelector("#contactForm");
-
-    if (contactForm) {
-
-        contactForm.addEventListener(
-            "submit",
-            event => {
-
-                event.preventDefault();
-
-                const name =
-                    document.querySelector("#name")?.value.trim();
-
-                const email =
-                    document.querySelector("#email")?.value.trim();
-
-                const subject =
-                    document.querySelector("#subject")?.value.trim();
-
-                const message =
-                    document.querySelector("#message")?.value.trim();
-
-
-                if (!name || !email || !message) {
-
-                    showToast(
-                        "Please fill in all required fields.",
-                        "error"
-                    );
-
-                    return;
-                }
-
-
-                const mailSubject =
-                    encodeURIComponent(
-                        subject ||
-                        `Portfolio Contact from ${name}`
-                    );
-
-                const mailBody =
-                    encodeURIComponent(
-                        `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
-                    );
-
-
-                const mailto =
-                    `mailto:tarunsavu@gmail.com?subject=${mailSubject}&body=${mailBody}`;
-
-
-                window.location.href = mailto;
-
-
-                showToast(
-                    "Opening your email application...",
-                    "success"
-                );
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       TOAST NOTIFICATION
-       ===================================================== */
-
-    const toast =
-        document.querySelector("#toast");
-
-
-    function showToast(message, type = "success") {
-
-        if (!toast) return;
-
-        toast.textContent = message;
-
-        toast.className =
-            `toast ${type} show`;
-
-        setTimeout(() => {
-
-            toast.classList.remove("show");
-
-        }, 3000);
-
-    }
-
-
-    /* =====================================================
-       BACK TO TOP
-       ===================================================== */
-
-    const backToTop =
-        document.querySelector("#backToTop");
-
-
-    window.addEventListener("scroll", () => {
-
-        if (!backToTop) return;
-
-        if (window.scrollY > 500) {
-
-            backToTop.classList.add("show");
-
-        } else {
-
-            backToTop.classList.remove("show");
-
-        }
-
-    });
-
-
-    if (backToTop) {
-
-        backToTop.addEventListener("click", () => {
-
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
-
-        });
-
-    }
-
-
-    /* =====================================================
-       ACTIVE NAVIGATION
-       ===================================================== */
-
-    const sections =
-        document.querySelectorAll("section[id]");
-
-    const navigationLinks =
-        document.querySelectorAll(".nav-links a");
-
-
-    window.addEventListener("scroll", () => {
-
-        let currentSection = "";
-
-        sections.forEach(section => {
-
-            const sectionTop =
-                section.offsetTop - 180;
-
-            const sectionHeight =
-                section.offsetHeight;
-
-            if (
-                window.scrollY >= sectionTop &&
-                window.scrollY <
-                sectionTop + sectionHeight
-            ) {
-
-                currentSection =
-                    section.getAttribute("id");
-
-            }
-
-        });
-
-
-        navigationLinks.forEach(link => {
-
-            link.classList.remove("active");
-
-            const href =
-                link.getAttribute("href");
-
-            if (
-                href === `#${currentSection}`
-            ) {
-
-                link.classList.add("active");
-
-            }
-
-        });
-
-    });
-
-
-    /* =====================================================
-       SMOOTH INTERNAL LINKS
-       ===================================================== */
-
-    document.querySelectorAll(
-        'a[href^="#"]'
-    ).forEach(link => {
-
-        link.addEventListener("click", event => {
-
-            const targetId =
-                link.getAttribute("href");
-
-            if (
-                targetId === "#" ||
-                targetId.length < 2
-            ) {
-                return;
-            }
-
-            const target =
-                document.querySelector(targetId);
-
-            if (!target) return;
-
-            event.preventDefault();
-
-            target.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-
-        });
-
-    });
-
-
-    /* =====================================================
-       PROFILE IMAGE FALLBACK
-       ===================================================== */
-
-    const profileImage =
-        document.querySelector(".profile-image");
-
-    if (profileImage) {
-
-        profileImage.addEventListener(
-            "error",
-            () => {
-
-                profileImage.style.display =
-                    "none";
-
-                const parent =
-                    profileImage.parentElement;
-
-                if (parent) {
-
-                    parent.classList.add(
-                        "profile-placeholder"
-                    );
-
-                }
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       CARD 3D TILT EFFECT
-       ===================================================== */
-
-    const tiltCards =
-        document.querySelectorAll(
-            ".project-card, .skill-card"
-        );
-
-
-    if (window.innerWidth > 900) {
-
-        tiltCards.forEach(card => {
-
-            card.addEventListener(
-                "mousemove",
-                event => {
-
-                    const rect =
-                        card.getBoundingClientRect();
-
-                    const x =
-                        event.clientX - rect.left;
-
-                    const y =
-                        event.clientY - rect.top;
-
-                    const centerX =
-                        rect.width / 2;
-
-                    const centerY =
-                        rect.height / 2;
-
-                    const rotateX =
-                        ((y - centerY) / centerY) * -4;
-
-                    const rotateY =
-                        ((x - centerX) / centerX) * 4;
-
-
-                    card.style.transform =
-                        `perspective(900px)
-                         rotateX(${rotateX}deg)
-                         rotateY(${rotateY}deg)
-                         translateY(-8px)`;
-
-                }
-            );
-
-
-            card.addEventListener(
-                "mouseleave",
-                () => {
-
-                    card.style.transform = "";
-
-                }
-            );
-
-        });
-
-    }
-
-
-    /* =====================================================
-       KEYBOARD SHORTCUT FOR AI
-       ===================================================== */
-
+    // -------------------------
+    // Close AI With Escape
+    // -------------------------
     document.addEventListener(
         "keydown",
         event => {
 
             if (
-                event.key === "/" &&
-                document.activeElement.tagName !== "INPUT" &&
-                document.activeElement.tagName !== "TEXTAREA"
+                event.key === "Escape" &&
+                aiPanel
             ) {
-
-                event.preventDefault();
-
-                if (aiPanel) {
-
-                    aiPanel.classList.add("active");
-
-                    aiInput?.focus();
-
-                }
-
+                aiPanel.classList.remove(
+                    "active"
+                );
             }
-
         }
     );
 
-
-    /* =====================================================
-       RANDOM BACKGROUND PARTICLES
-       ===================================================== */
-
-    const particleContainer =
-        document.querySelector("#particles");
-
-
-    if (particleContainer) {
-
-        for (let i = 0; i < 35; i++) {
-
-            const particle =
-                document.createElement("span");
-
-            particle.className =
-                "particle";
-
-            particle.style.left =
-                Math.random() * 100 + "%";
-
-            particle.style.top =
-                Math.random() * 100 + "%";
-
-            particle.style.animationDelay =
-                Math.random() * 6 + "s";
-
-            particle.style.animationDuration =
-                4 + Math.random() * 6 + "s";
-
-            particleContainer.appendChild(
-                particle
-            );
-
-        }
-
-    }
-
-
-    /* =====================================================
-       CONSOLE INFORMATION
-       ===================================================== */
-
+    // -------------------------
+    // Page Loaded
+    // -------------------------
     console.log(
-        "%c Tarun Kumar Savu - Portfolio ",
-        "font-size:20px;font-weight:bold;"
-    );
-
-    console.log(
-        "Portfolio loaded successfully."
+        "Tarun Kumar Savu Portfolio loaded successfully."
     );
 
 });
