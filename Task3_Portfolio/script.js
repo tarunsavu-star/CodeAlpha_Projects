@@ -1,17 +1,48 @@
-// Mobile navigation
-function toggleMenu() {
-    const menu = document.querySelector(".nav-links");
-    menu.classList.toggle("active");
-}
+// Portfolio JavaScript
 
+document.addEventListener("DOMContentLoaded", function () {
 
-// Close mobile menu after clicking a link
-document.querySelectorAll(".nav-links a").forEach(link => {
-    link.addEventListener("click", () => {
-        document.querySelector(".nav-links").classList.remove("active");
+    // Set current year in footer
+    const year = document.getElementById("year");
+
+    if (year) {
+        year.textContent = new Date().getFullYear();
+    }
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+
+        link.addEventListener("click", function (event) {
+
+            const targetId = this.getAttribute("href");
+
+            if (targetId === "#") return;
+
+            const target = document.querySelector(targetId);
+
+            if (target) {
+                event.preventDefault();
+
+                target.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+            }
+        });
+
     });
+
+    // Simple button animation
+    document.querySelectorAll(".btn").forEach(function (button) {
+
+        button.addEventListener("click", function () {
+            this.style.transform = "scale(0.95)";
+
+            setTimeout(() => {
+                this.style.transform = "scale(1)";
+            }, 150);
+        });
+
+    });
+
 });
-
-
-// Current year
-document.getElementById("year").textContent = new Date().getFullYear();
